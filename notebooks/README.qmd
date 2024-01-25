@@ -1,5 +1,5 @@
 ---
-title: "Transcription Factor Footprinting Score and Open Chromatin Mutation Data Integration"
+title: "Transcription Factor Footprinting and Noncoding Mutation Data Integration"
 format: gfm
 jupyter: python3
 ---
