@@ -1,5 +1,5 @@
 ---
-title: "Transcription Factor Footprinting and Noncoding Mutation Data Integration"
+title: "Transcription Factor Footprinting and Noncoding Mutation Data Integration Workflow"
 format: gfm
 jupyter: python3
 ---
