@@ -1,8 +1,0 @@
----
-title: "Transcription Factor Footprinting and Noncoding Mutation Data Integration Workflow"
-format: gfm
-jupyter: python3
----
-
-This is a Github README doc that is dynamically generated from the `qmd` notebook.
-
