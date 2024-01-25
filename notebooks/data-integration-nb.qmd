@@ -11,4 +11,41 @@ jupyter: python3
 
 ## Transcription Factor (TF) Footprinting Scores
 
+TF footprints are scored using [TOBIAS](https://github.molgen.mpg.de/pages/loosolab/www/software/TOBIAS/) program from Looso Lab, Max Plank Institute. The TOBIAS pipeline was run on individual samples so TOBIAS's internal intersample normalization was not applied. The raw footprint scores were collated for all samples in the pan-cancer study and combined into a large dense matrix containing unique footprint sites of a particular motif of interest across all samples. As we have 1360 motifs of interest in this study, we have 1360 large matrices to process. 
 
+For demonstration purposes, a subset of TF footprint data on the open chromatin regions in only breast cancer samples from TCGA database was used here to save storage space and lower processing overhead. Additionally, only 1 TF motif will be presented here in the analysis workflow.
+
+### Loading the footprint matrix
+
+First, load up required Python packages.
+```{python}
+import os
+import textwrap
+import pandas as pd
+import seaborn as sns
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+from natsort import index_natsorted
+```
+
+Now, we can import the matrix into a Pandas dataframe. The matrix is stored in a tab-delimited text file (`.tsv`). The first column defines the chromosomal location, the second and third column contain the genomic coordinates of the TF footprint, the fourth column retains the strandedness of the TF binding site (TFBS), the fifth column contains the TFBS score (similarity score with the tested motif PWM), and the rest of the columns carry the actual TOBIAS-calculated TF footprint scores for individual samples. 
+
+The data is loaded into a Pandas dataframe and the first 5 rows are displayed.
+
+```{python, eval=TRUE, echo=TRUE}
+# import the data
+filepath = '../demo-data/E2F2_E2F2_HUMAN.H11MO.0.B_BRCA-subtype-vcf-filtered-matrix.txt'
+matrix_afps = pd.read_csv(filepath, sep='\t')
+matrix_afps.head()
+```
+
+
+```{python}
+# extract motif id from filename
+motif_id = os.path.basename(filepath).replace('_fpscore-af-varsites-combined-matrix-wide.tsv', '')
+motif_id
+```
+
+```{python}
+
+```
