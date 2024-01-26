@@ -52,18 +52,18 @@ def pyrange_obj_overlap(gr_fpscore, grs_vcf_dict):
         # drop the column "End" column
         overlap = overlap.drop([f"End_{key}_varsite_pos"])
 
-        # cluster the pyRanges object by genomic range
+        # cluster the pyRanges object by genomic range; overlapping regions wil share the same id
         overlap = overlap.cluster(slack=-1)
 
         # cast back into a dataframe and filter by the AF column's max value (per cluster); this returns a filtered dataframe
         filtered_df = overlap.df.loc[overlap.df.groupby('Cluster')['AF'].idxmax()]
 
         # then rename the columns
-        filtered_df = filtered_df.rename(columns={f"Start_{key}_varsite_pos": f"{key}_varsite_pos", "ref_allele": f"{key}_ref_allele", "alt_allele": f"{key}_alt_allele", "AF": f"{key}_AF"})
+        filtered_df = filtered_df.rename(columns={f"Start_{key}_varsite_pos": f"{key}_varsite_pos", "ref_allele": f"{key}_REF_al", "alt_allele": f"{key}_ALT_al", "AF": f"{key}_AF"})
     
         # replace all the -1 values in column 'Start_varsites', 'ref_allele' and 'alt_allele', and AF with 0
         # Define a dictionary mapping column names to values to replace
-        replace_dict = {f"{key}_varsite_pos": {-1: None}, f"{key}_ref_allele": {str(-1): None}, f"{key}_alt_allele": {str(-1): None}, f"{key}_AF": {-1: 0}}
+        replace_dict = {f"{key}_varsite_pos": {-1: None}, f"{key}_REF_al": {str(-1): None}, f"{key}_ALT_al": {str(-1): None}, f"{key}_AF": {-1: 0}}
         filtered_df = filtered_df.replace(replace_dict)
 
         # drop cluster column
