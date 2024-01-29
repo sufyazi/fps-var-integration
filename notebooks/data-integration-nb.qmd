@@ -4,6 +4,8 @@ author: Suffian Azizan
 format: 
     gfm:
         markdown-headings: atx
+        strip-comments: true
+        df-print: default
     typst:
         wrap: auto
         papersize: a4
@@ -479,6 +481,7 @@ The distribution of the unscaled and scaled FPS datasets can be plotted using Se
 #| eval: true
 #| echo: false
 #| warning: false
+#| output: true
 
 # Create a figure with two subplots side by side
 fig, axs = plt.subplots(1,2 , figsize=(10, 5))
