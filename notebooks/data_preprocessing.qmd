@@ -422,10 +422,8 @@ fps_df_scaled_lpv = fps_df_scaled_lpv.reset_index(drop=True)
 ```{python}
 #| eval: true
 #| echo: false
-fps_df_scaled_lpv.head(5).style\
-    .set_properties(**{'font-size': '10pt',})\
-    .format_index(func_underscore_replace, axis=1)\
-    .set_table_styles([{'selector': 'th', 'props': [('font-size', '10pt')]}])
+fps_df_scaled_lpv.head(5)
+
 ```
 
 ```{python}
