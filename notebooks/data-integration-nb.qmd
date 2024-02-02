@@ -17,6 +17,7 @@ format:
         number-sections: true
         df-print: paged
 jupyter: python3
+keep-md: true
 ---
 
 *Note: This is a Github README doc that is dynamically generated from the `qmd` notebook.*
@@ -82,6 +83,19 @@ def func_wrap(x):
     else:
         return x
 ```
+
+```{python}
+#| echo: false
+#| output: false
+from IPython import get_ipython
+# special ipython function to get the html formatter
+html_formatter = get_ipython().display_formatter.formatters['text/html']
+html_formatter.for_type(
+    pd.DataFrame,
+    lambda df: df.style.set_table_attributes('data-quarto-disable-processing="true"').to_html(max_rows = pd.get_option("display.max_rows"), show_dimensions = True)
+)
+```
+
 
 ```{python}
 #| eval: true
