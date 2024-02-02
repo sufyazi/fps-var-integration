@@ -1,14 +1,12 @@
 ---
-title: Pan-Cancer TF Footprinting & Noncoding Mutation Data Integration
+title: Preprocessing TF and Mutation Data
 author: Suffian Azizan
 format: gfm
 jupyter: python3
 ---
 
-*Note: This is a Github README doc that is dynamically generated from the `qmd` notebook.*
-
 # Background
-This pan-cancer study makes use of restricted ATAC-seq and DNAse-seq datasets generated from healthy and cancerous human tissue samplles available in the public databases (i.e. TCGA and BLUEPRINT) to generate TF footprinting data from the open chromatin regions. The TF footprinting data is then combined with the noncoding mutation data from the same samples obtained via variant calling to identify TF binding sites (TFBS) that carry variant alleles (or potentially mutations) that may modulate TF footprint scores (proxy for TF binding activity).
+This repo documents a crucial step in my current pan-cancer study that makes use of restricted ATAC-seq and DNAse-seq datasets generated from healthy and cancerous human tissue samples available in the public databases (i.e. TCGA and BLUEPRINT). I collated raw data from these databases to generate TF footprinting data from the open chromatin regions. The TF footprinting data is then combined with the noncoding mutation data from the same samples obtained via variant calling to identify TF binding sites (TFBS) that carry variant alleles (potentially somatic mutations) that may modulate TF footprint scores (proxy for TF binding activity).
 
 # Data Preprocessing
 TF footprints are determined and scored using the [TOBIAS](https://github.molgen.mpg.de/pages/loosolab/www/software/TOBIAS/) program published by Looso Lab (Max Plank Institute). A customized TOBIAS pipeline was run on individual samples so TOBIAS's internal intersample normalization was not applied. The raw footprint scores were collated for all samples in this pan-cancer study and combined into a large dense matrix containing unique footprint sites of a particular motif of interest across all samples. As we have 1360 motifs of interest in this study, we have 1360 large data tables to process. 
@@ -25,6 +23,18 @@ import seaborn as sns
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from natsort import index_natsorted
+```
+
+```{python}
+#| echo: false
+#| output: false
+from IPython import get_ipython
+# special ipython function to get the html formatter
+html_formatter = get_ipython().display_formatter.formatters['text/html']
+html_formatter.for_type(
+    pd.DataFrame,
+    lambda df: df.style.set_table_attributes('data-quarto-disable-processing="true"').to_html(max_rows = pd.get_option("display.max_rows"), show_dimensions = True)
+)
 ```
 
 ## Loading up the footprint data table
@@ -61,7 +71,6 @@ def func_wrap(x):
 ```{python}
 #| eval: true
 #| echo: false
-
 df_fpscore.head(n=4)
 
 ```
@@ -85,7 +94,8 @@ df_fpscore = df_fpscore.rename(columns=lambda x: x.replace('score', 'fps') if x.
 #| eval: true
 #| echo: false
 
-df_fpscore.head(n=10).style.set_properties(**{'font-size': '10pt',})
+df_fpscore.head(n=10)
+
 ```
 
 ## Loading up the mutation data table
@@ -103,11 +113,8 @@ df_vcf = pd.read_csv(vcfpath, sep="\t")
 ```{python}
 #| eval: true
 #| echo: false
-df_vcf.head(n=5).style\
-    .set_properties(**{'font-size': '10pt',})\
-    .hide()\
-    .format_index(func_wrap, axis=1)\
-    .format(func_wrap)
+df_vcf.head(n=5)
+
 ```
 
 
@@ -164,12 +171,8 @@ gr_fpscore = pr.PyRanges(df_fpscore)
 ```{python}
 #| eval: true
 #| echo: false
-gr_fpscore.head(n=5).df.style\
-    .set_properties(**{'font-size': '10pt',})\
-    .hide()\
-    .format_index(func_underscore_replace, axis=1)\
-    .format(func_wrap)\
-    .set_table_styles([{'selector': 'th', 'props': [('font-size', '8pt')]}])
+gr_fpscore.head(n=5)
+
 ```
 
 Do the same for the mutation dataframes in the dictionary. Loop through it and save them in a new dictionary.
@@ -255,16 +258,13 @@ A slice of the final dataframe is shown below.
 #| eval: true
 #| echo: false
 
-# Limit to 8 columns
+# Limit to 6 columns
 pd.set_option('display.max_columns', 6)
 
 # Truncate middle columns
 pd.set_option('display.expand_frame_repr', False)
 
-final_df.head(n=5).style\
-    .set_properties(**{'font-size': '8pt',})\
-    .format_index(func_underscore_replace, axis=1)\
-    .set_table_styles([{'selector': 'th', 'props': [('font-size', '8pt')]}])
+final_df.head(n=5)
 ```
 
 The final dataframe here is saved as a tab-delimited text file in `demo-data/` with the filename suffix "`_fpscore-af-varsites-combined-matrix-wide.tsv`".
@@ -291,10 +291,8 @@ print(f"The motif ID of the current TF data: {motif_id} \n")
 #| eval: true
 #| echo: false
 
-afps_df.head().style\
-    .set_properties(**{'font-size': '10pt',})\
-    .hide()\
-    .format_index(func_underscore_replace, axis=1)
+afps_df.head()
+
 ```
 
 Filter the loaded table to include only the `_AF` and `_fps` columns, as well as the `region_id` column to get a matrix of TF footprint scores and allele frequencies of the variant sites overlapping the TF footprint sites.
@@ -310,10 +308,8 @@ afps_matrix = afps_df.filter(regex='_AF$|_fps$|_id$').copy()
 ```{python}
 #| eval: true
 #| echo: false
-afps_matrix.head(5).style\
-    .set_properties(**{'font-size': '10pt',})\
-    .hide()\
-    .format_index(func_underscore_replace, axis=1)
+afps_matrix.head(5)
+
 ```
 
 This matrix is in the wide format so it should be converted into a long format for easier wrangling.
@@ -347,10 +343,8 @@ afps_mtx_lpv = afps_mtx_lpv.reset_index(drop=True)
 #| eval: true
 #| echo: false
 
-afps_mtx_lpv.head(5).style\
-    .set_properties(**{'font-size': '8pt',})\
-    .format_index(func_underscore_replace, axis=1)\
-    .set_table_styles([{'selector': 'th', 'props': [('font-size', '8pt')]}])
+afps_mtx_lpv.head(5)
+
 ```
 
 
@@ -389,10 +383,8 @@ fps_df_scaled = fps_df_scaled.add_suffix('_scaled')
 #| eval: true
 #| echo: false
 
-fps_df_scaled.head(5).style\
-    .set_properties(**{'font-size': '10pt',})\
-    .format_index(func_underscore_replace, axis=1)\
-    .set_table_styles([{'selector': 'th', 'props': [('font-size', '10pt')]}])
+fps_df_scaled.head(5)
+
 ```
 
 Now, convert the scaled dataframe into a long format.

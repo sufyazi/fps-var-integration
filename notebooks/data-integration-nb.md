@@ -1,19 +1,18 @@
-# Pan-Cancer TF Footprinting & Noncoding Mutation Data Integration
+# Preprocessing TF and Mutation Data
 Suffian Azizan
-
-*Note: This is a Github README doc that is dynamically generated from
-the `qmd` notebook.*
 
 # Background
 
-This pan-cancer study makes use of restricted ATAC-seq and DNAse-seq
-datasets generated from healthy and cancerous human tissue samplles
-available in the public databases (i.e. TCGA and BLUEPRINT) to generate
-TF footprinting data from the open chromatin regions. The TF
-footprinting data is then combined with the noncoding mutation data from
-the same samples obtained via variant calling to identify TF binding
-sites (TFBS) that carry variant alleles (or potentially mutations) that
-may modulate TF footprint scores (proxy for TF binding activity).
+This repo documents a crucial step in my current pan-cancer study that
+makes use of restricted ATAC-seq and DNAse-seq datasets generated from
+healthy and cancerous human tissue samples available in the public
+databases (i.e. TCGA and BLUEPRINT). I collated raw data from these
+databases to generate TF footprinting data from the open chromatin
+regions. The TF footprinting data is then combined with the noncoding
+mutation data from the same samples obtained via variant calling to
+identify TF binding sites (TFBS) that carry variant alleles (potentially
+somatic mutations) that may modulate TF footprint scores (proxy for TF
+binding activity).
 
 # Data Preprocessing
 
@@ -79,27 +78,79 @@ def func_wrap(x):
         return x
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-&#10;    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&#10;    .dataframe thead th {
-        text-align: right;
-    }
+<style type="text/css">
 </style>
-
-|     | TFBS_chr | TFBS_start | TFBS_end | TFBS_strand | TFBS_score | 98JKPD8_LumA_score | ANAB5F7_Basal_score | S6R691V_Her2_score | PU24GB8_LumB_score | 2GAMBDQ_Normal-like_score |
-|-----|----------|------------|----------|-------------|------------|--------------------|---------------------|--------------------|--------------------|---------------------------|
-| 0   | chr1     | 10628      | 10638    | \+          | 7.40189    | 0.0000             | 0.00000             | 0.00000            | 0.000              | 0.0000                    |
-| 1   | chr1     | 181224     | 181234   | \+          | 7.99866    | 0.0000             | 0.00000             | 0.00000            | 0.000              | 0.0000                    |
-| 2   | chr1     | 779214     | 779224   | \-          | 7.79647    | 0.0000             | 0.00000             | 0.00000            | 0.000              | 0.0000                    |
-| 3   | chr1     | 998754     | 998764   | \+          | 8.56029    | 0.1376             | 0.14035             | 0.12842            | 0.145              | 0.1051                    |
-
-</div>
+<table id="T_af364" data-quarto-disable-processing="true">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_af364_level0_col0" class="col_heading level0 col0" >TFBS_chr</th>
+      <th id="T_af364_level0_col1" class="col_heading level0 col1" >TFBS_start</th>
+      <th id="T_af364_level0_col2" class="col_heading level0 col2" >TFBS_end</th>
+      <th id="T_af364_level0_col3" class="col_heading level0 col3" >TFBS_strand</th>
+      <th id="T_af364_level0_col4" class="col_heading level0 col4" >TFBS_score</th>
+      <th id="T_af364_level0_col5" class="col_heading level0 col5" >98JKPD8_LumA_score</th>
+      <th id="T_af364_level0_col6" class="col_heading level0 col6" >ANAB5F7_Basal_score</th>
+      <th id="T_af364_level0_col7" class="col_heading level0 col7" >S6R691V_Her2_score</th>
+      <th id="T_af364_level0_col8" class="col_heading level0 col8" >PU24GB8_LumB_score</th>
+      <th id="T_af364_level0_col9" class="col_heading level0 col9" >2GAMBDQ_Normal-like_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_af364_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_af364_row0_col0" class="data row0 col0" >chr1</td>
+      <td id="T_af364_row0_col1" class="data row0 col1" >10628</td>
+      <td id="T_af364_row0_col2" class="data row0 col2" >10638</td>
+      <td id="T_af364_row0_col3" class="data row0 col3" >+</td>
+      <td id="T_af364_row0_col4" class="data row0 col4" >7.401890</td>
+      <td id="T_af364_row0_col5" class="data row0 col5" >0.000000</td>
+      <td id="T_af364_row0_col6" class="data row0 col6" >0.000000</td>
+      <td id="T_af364_row0_col7" class="data row0 col7" >0.000000</td>
+      <td id="T_af364_row0_col8" class="data row0 col8" >0.000000</td>
+      <td id="T_af364_row0_col9" class="data row0 col9" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_af364_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_af364_row1_col0" class="data row1 col0" >chr1</td>
+      <td id="T_af364_row1_col1" class="data row1 col1" >181224</td>
+      <td id="T_af364_row1_col2" class="data row1 col2" >181234</td>
+      <td id="T_af364_row1_col3" class="data row1 col3" >+</td>
+      <td id="T_af364_row1_col4" class="data row1 col4" >7.998660</td>
+      <td id="T_af364_row1_col5" class="data row1 col5" >0.000000</td>
+      <td id="T_af364_row1_col6" class="data row1 col6" >0.000000</td>
+      <td id="T_af364_row1_col7" class="data row1 col7" >0.000000</td>
+      <td id="T_af364_row1_col8" class="data row1 col8" >0.000000</td>
+      <td id="T_af364_row1_col9" class="data row1 col9" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_af364_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_af364_row2_col0" class="data row2 col0" >chr1</td>
+      <td id="T_af364_row2_col1" class="data row2 col1" >779214</td>
+      <td id="T_af364_row2_col2" class="data row2 col2" >779224</td>
+      <td id="T_af364_row2_col3" class="data row2 col3" >-</td>
+      <td id="T_af364_row2_col4" class="data row2 col4" >7.796470</td>
+      <td id="T_af364_row2_col5" class="data row2 col5" >0.000000</td>
+      <td id="T_af364_row2_col6" class="data row2 col6" >0.000000</td>
+      <td id="T_af364_row2_col7" class="data row2 col7" >0.000000</td>
+      <td id="T_af364_row2_col8" class="data row2 col8" >0.000000</td>
+      <td id="T_af364_row2_col9" class="data row2 col9" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_af364_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_af364_row3_col0" class="data row3 col0" >chr1</td>
+      <td id="T_af364_row3_col1" class="data row3 col1" >998754</td>
+      <td id="T_af364_row3_col2" class="data row3 col2" >998764</td>
+      <td id="T_af364_row3_col3" class="data row3 col3" >+</td>
+      <td id="T_af364_row3_col4" class="data row3 col4" >8.560290</td>
+      <td id="T_af364_row3_col5" class="data row3 col5" >0.137600</td>
+      <td id="T_af364_row3_col6" class="data row3 col6" >0.140350</td>
+      <td id="T_af364_row3_col7" class="data row3 col7" >0.128420</td>
+      <td id="T_af364_row3_col8" class="data row3 col8" >0.145000</td>
+      <td id="T_af364_row3_col9" class="data row3 col9" >0.105100</td>
+    </tr>
+  </tbody>
+</table>
 
 Rename the `_score` column to `_fps` to avoid confusion with the
 mutation score column in the mutation data table later, and drop the
@@ -115,23 +166,134 @@ df_fpscore = df_fpscore.rename(columns=lambda x: x.replace('score', 'fps') if x.
 ```
 
 <style type="text/css">
-#T_571c5_row0_col0, #T_571c5_row0_col1, #T_571c5_row0_col2, #T_571c5_row0_col3, #T_571c5_row0_col4, #T_571c5_row0_col5, #T_571c5_row0_col6, #T_571c5_row0_col7, #T_571c5_row1_col0, #T_571c5_row1_col1, #T_571c5_row1_col2, #T_571c5_row1_col3, #T_571c5_row1_col4, #T_571c5_row1_col5, #T_571c5_row1_col6, #T_571c5_row1_col7, #T_571c5_row2_col0, #T_571c5_row2_col1, #T_571c5_row2_col2, #T_571c5_row2_col3, #T_571c5_row2_col4, #T_571c5_row2_col5, #T_571c5_row2_col6, #T_571c5_row2_col7, #T_571c5_row3_col0, #T_571c5_row3_col1, #T_571c5_row3_col2, #T_571c5_row3_col3, #T_571c5_row3_col4, #T_571c5_row3_col5, #T_571c5_row3_col6, #T_571c5_row3_col7, #T_571c5_row4_col0, #T_571c5_row4_col1, #T_571c5_row4_col2, #T_571c5_row4_col3, #T_571c5_row4_col4, #T_571c5_row4_col5, #T_571c5_row4_col6, #T_571c5_row4_col7, #T_571c5_row5_col0, #T_571c5_row5_col1, #T_571c5_row5_col2, #T_571c5_row5_col3, #T_571c5_row5_col4, #T_571c5_row5_col5, #T_571c5_row5_col6, #T_571c5_row5_col7, #T_571c5_row6_col0, #T_571c5_row6_col1, #T_571c5_row6_col2, #T_571c5_row6_col3, #T_571c5_row6_col4, #T_571c5_row6_col5, #T_571c5_row6_col6, #T_571c5_row6_col7, #T_571c5_row7_col0, #T_571c5_row7_col1, #T_571c5_row7_col2, #T_571c5_row7_col3, #T_571c5_row7_col4, #T_571c5_row7_col5, #T_571c5_row7_col6, #T_571c5_row7_col7, #T_571c5_row8_col0, #T_571c5_row8_col1, #T_571c5_row8_col2, #T_571c5_row8_col3, #T_571c5_row8_col4, #T_571c5_row8_col5, #T_571c5_row8_col6, #T_571c5_row8_col7, #T_571c5_row9_col0, #T_571c5_row9_col1, #T_571c5_row9_col2, #T_571c5_row9_col3, #T_571c5_row9_col4, #T_571c5_row9_col5, #T_571c5_row9_col6, #T_571c5_row9_col7 {
-  font-size: 10pt;
-}
 </style>
-
-|     | Chromosome | Start   | End     | 98JKPD8_LumA_fps | ANAB5F7_Basal_fps | S6R691V_Her2_fps | PU24GB8_LumB_fps | 2GAMBDQ_Norm_fps |
-|-----|------------|---------|---------|------------------|-------------------|------------------|------------------|------------------|
-| 0   | chr1       | 10628   | 10638   | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
-| 1   | chr1       | 181224  | 181234  | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
-| 2   | chr1       | 779214  | 779224  | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
-| 3   | chr1       | 998754  | 998764  | 0.137600         | 0.140350          | 0.128420         | 0.145000         | 0.105100         |
-| 4   | chr1       | 998768  | 998778  | 0.182240         | 0.167080          | 0.169110         | 0.183020         | 0.127590         |
-| 5   | chr1       | 1019693 | 1019703 | 0.622590         | 0.379450          | 0.489290         | 0.644200         | 0.492220         |
-| 6   | chr1       | 1041096 | 1041106 | 0.096050         | 0.097560          | 0.090640         | 0.127590         | 0.110160         |
-| 7   | chr1       | 1164827 | 1164837 | 0.110270         | 0.149950          | 0.073960         | 0.067850         | 0.080790         |
-| 8   | chr1       | 1206766 | 1206776 | 0.067360         | 0.063970          | 0.041980         | 0.069200         | 0.072820         |
-| 9   | chr1       | 1309989 | 1309999 | 0.123050         | 0.144050          | 0.141260         | 0.124540         | 0.096460         |
+<table id="T_e3ecf" data-quarto-disable-processing="true">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_e3ecf_level0_col0" class="col_heading level0 col0" >Chromosome</th>
+      <th id="T_e3ecf_level0_col1" class="col_heading level0 col1" >Start</th>
+      <th id="T_e3ecf_level0_col2" class="col_heading level0 col2" >End</th>
+      <th id="T_e3ecf_level0_col3" class="col_heading level0 col3" >98JKPD8_LumA_fps</th>
+      <th id="T_e3ecf_level0_col4" class="col_heading level0 col4" >ANAB5F7_Basal_fps</th>
+      <th id="T_e3ecf_level0_col5" class="col_heading level0 col5" >S6R691V_Her2_fps</th>
+      <th id="T_e3ecf_level0_col6" class="col_heading level0 col6" >PU24GB8_LumB_fps</th>
+      <th id="T_e3ecf_level0_col7" class="col_heading level0 col7" >2GAMBDQ_Norm_fps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_e3ecf_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_e3ecf_row0_col0" class="data row0 col0" >chr1</td>
+      <td id="T_e3ecf_row0_col1" class="data row0 col1" >10628</td>
+      <td id="T_e3ecf_row0_col2" class="data row0 col2" >10638</td>
+      <td id="T_e3ecf_row0_col3" class="data row0 col3" >0.000000</td>
+      <td id="T_e3ecf_row0_col4" class="data row0 col4" >0.000000</td>
+      <td id="T_e3ecf_row0_col5" class="data row0 col5" >0.000000</td>
+      <td id="T_e3ecf_row0_col6" class="data row0 col6" >0.000000</td>
+      <td id="T_e3ecf_row0_col7" class="data row0 col7" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_e3ecf_row1_col0" class="data row1 col0" >chr1</td>
+      <td id="T_e3ecf_row1_col1" class="data row1 col1" >181224</td>
+      <td id="T_e3ecf_row1_col2" class="data row1 col2" >181234</td>
+      <td id="T_e3ecf_row1_col3" class="data row1 col3" >0.000000</td>
+      <td id="T_e3ecf_row1_col4" class="data row1 col4" >0.000000</td>
+      <td id="T_e3ecf_row1_col5" class="data row1 col5" >0.000000</td>
+      <td id="T_e3ecf_row1_col6" class="data row1 col6" >0.000000</td>
+      <td id="T_e3ecf_row1_col7" class="data row1 col7" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_e3ecf_row2_col0" class="data row2 col0" >chr1</td>
+      <td id="T_e3ecf_row2_col1" class="data row2 col1" >779214</td>
+      <td id="T_e3ecf_row2_col2" class="data row2 col2" >779224</td>
+      <td id="T_e3ecf_row2_col3" class="data row2 col3" >0.000000</td>
+      <td id="T_e3ecf_row2_col4" class="data row2 col4" >0.000000</td>
+      <td id="T_e3ecf_row2_col5" class="data row2 col5" >0.000000</td>
+      <td id="T_e3ecf_row2_col6" class="data row2 col6" >0.000000</td>
+      <td id="T_e3ecf_row2_col7" class="data row2 col7" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_e3ecf_row3_col0" class="data row3 col0" >chr1</td>
+      <td id="T_e3ecf_row3_col1" class="data row3 col1" >998754</td>
+      <td id="T_e3ecf_row3_col2" class="data row3 col2" >998764</td>
+      <td id="T_e3ecf_row3_col3" class="data row3 col3" >0.137600</td>
+      <td id="T_e3ecf_row3_col4" class="data row3 col4" >0.140350</td>
+      <td id="T_e3ecf_row3_col5" class="data row3 col5" >0.128420</td>
+      <td id="T_e3ecf_row3_col6" class="data row3 col6" >0.145000</td>
+      <td id="T_e3ecf_row3_col7" class="data row3 col7" >0.105100</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_e3ecf_row4_col0" class="data row4 col0" >chr1</td>
+      <td id="T_e3ecf_row4_col1" class="data row4 col1" >998768</td>
+      <td id="T_e3ecf_row4_col2" class="data row4 col2" >998778</td>
+      <td id="T_e3ecf_row4_col3" class="data row4 col3" >0.182240</td>
+      <td id="T_e3ecf_row4_col4" class="data row4 col4" >0.167080</td>
+      <td id="T_e3ecf_row4_col5" class="data row4 col5" >0.169110</td>
+      <td id="T_e3ecf_row4_col6" class="data row4 col6" >0.183020</td>
+      <td id="T_e3ecf_row4_col7" class="data row4 col7" >0.127590</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_e3ecf_row5_col0" class="data row5 col0" >chr1</td>
+      <td id="T_e3ecf_row5_col1" class="data row5 col1" >1019693</td>
+      <td id="T_e3ecf_row5_col2" class="data row5 col2" >1019703</td>
+      <td id="T_e3ecf_row5_col3" class="data row5 col3" >0.622590</td>
+      <td id="T_e3ecf_row5_col4" class="data row5 col4" >0.379450</td>
+      <td id="T_e3ecf_row5_col5" class="data row5 col5" >0.489290</td>
+      <td id="T_e3ecf_row5_col6" class="data row5 col6" >0.644200</td>
+      <td id="T_e3ecf_row5_col7" class="data row5 col7" >0.492220</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_e3ecf_row6_col0" class="data row6 col0" >chr1</td>
+      <td id="T_e3ecf_row6_col1" class="data row6 col1" >1041096</td>
+      <td id="T_e3ecf_row6_col2" class="data row6 col2" >1041106</td>
+      <td id="T_e3ecf_row6_col3" class="data row6 col3" >0.096050</td>
+      <td id="T_e3ecf_row6_col4" class="data row6 col4" >0.097560</td>
+      <td id="T_e3ecf_row6_col5" class="data row6 col5" >0.090640</td>
+      <td id="T_e3ecf_row6_col6" class="data row6 col6" >0.127590</td>
+      <td id="T_e3ecf_row6_col7" class="data row6 col7" >0.110160</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_e3ecf_row7_col0" class="data row7 col0" >chr1</td>
+      <td id="T_e3ecf_row7_col1" class="data row7 col1" >1164827</td>
+      <td id="T_e3ecf_row7_col2" class="data row7 col2" >1164837</td>
+      <td id="T_e3ecf_row7_col3" class="data row7 col3" >0.110270</td>
+      <td id="T_e3ecf_row7_col4" class="data row7 col4" >0.149950</td>
+      <td id="T_e3ecf_row7_col5" class="data row7 col5" >0.073960</td>
+      <td id="T_e3ecf_row7_col6" class="data row7 col6" >0.067850</td>
+      <td id="T_e3ecf_row7_col7" class="data row7 col7" >0.080790</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_e3ecf_row8_col0" class="data row8 col0" >chr1</td>
+      <td id="T_e3ecf_row8_col1" class="data row8 col1" >1206766</td>
+      <td id="T_e3ecf_row8_col2" class="data row8 col2" >1206776</td>
+      <td id="T_e3ecf_row8_col3" class="data row8 col3" >0.067360</td>
+      <td id="T_e3ecf_row8_col4" class="data row8 col4" >0.063970</td>
+      <td id="T_e3ecf_row8_col5" class="data row8 col5" >0.041980</td>
+      <td id="T_e3ecf_row8_col6" class="data row8 col6" >0.069200</td>
+      <td id="T_e3ecf_row8_col7" class="data row8 col7" >0.072820</td>
+    </tr>
+    <tr>
+      <th id="T_e3ecf_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_e3ecf_row9_col0" class="data row9 col0" >chr1</td>
+      <td id="T_e3ecf_row9_col1" class="data row9 col1" >1309989</td>
+      <td id="T_e3ecf_row9_col2" class="data row9 col2" >1309999</td>
+      <td id="T_e3ecf_row9_col3" class="data row9 col3" >0.123050</td>
+      <td id="T_e3ecf_row9_col4" class="data row9 col4" >0.144050</td>
+      <td id="T_e3ecf_row9_col5" class="data row9 col5" >0.141260</td>
+      <td id="T_e3ecf_row9_col6" class="data row9 col6" >0.124540</td>
+      <td id="T_e3ecf_row9_col7" class="data row9 col7" >0.096460</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Loading up the mutation data table
 
@@ -146,18 +308,61 @@ df_vcf = pd.read_csv(vcfpath, sep="\t")
 ```
 
 <style type="text/css">
-#T_c7aeb_row0_col0, #T_c7aeb_row0_col1, #T_c7aeb_row0_col2, #T_c7aeb_row0_col3, #T_c7aeb_row0_col4, #T_c7aeb_row1_col0, #T_c7aeb_row1_col1, #T_c7aeb_row1_col2, #T_c7aeb_row1_col3, #T_c7aeb_row1_col4, #T_c7aeb_row2_col0, #T_c7aeb_row2_col1, #T_c7aeb_row2_col2, #T_c7aeb_row2_col3, #T_c7aeb_row2_col4, #T_c7aeb_row3_col0, #T_c7aeb_row3_col1, #T_c7aeb_row3_col2, #T_c7aeb_row3_col3, #T_c7aeb_row3_col4, #T_c7aeb_row4_col0, #T_c7aeb_row4_col1, #T_c7aeb_row4_col2, #T_c7aeb_row4_col3, #T_c7aeb_row4_col4 {
-  font-size: 10pt;
-}
 </style>
-
-| \#\[1\]CHROM | \[2\]POS | \[3\]REF                            | \[4\]ALT                | \[5\]AF |
-|--------------|----------|-------------------------------------|-------------------------|---------|
-| chr1         | 10629    | GGCGCGC                             | GGCGC                   | 1.0     |
-| chr1         | 998764   | C                                   | G                       | 0.5     |
-| chr1         | 998764   | CGGAGGG                             | CGGAGGGGAG GG           | 0.3125  |
-| chr1         | 1041101  | CGGAGCGGGG CGGGAGCGGG GCGGGAGCGG GG | CGGAGCGGGG CGGGAGCGGG G | 0.5     |
-| chr1         | 1164837  | C                                   | T                       | 0.8125  |
+<table id="T_3e8fc" data-quarto-disable-processing="true">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_3e8fc_level0_col0" class="col_heading level0 col0" >#[1]CHROM</th>
+      <th id="T_3e8fc_level0_col1" class="col_heading level0 col1" >[2]POS</th>
+      <th id="T_3e8fc_level0_col2" class="col_heading level0 col2" >[3]REF</th>
+      <th id="T_3e8fc_level0_col3" class="col_heading level0 col3" >[4]ALT</th>
+      <th id="T_3e8fc_level0_col4" class="col_heading level0 col4" >[5]AF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_3e8fc_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_3e8fc_row0_col0" class="data row0 col0" >chr1</td>
+      <td id="T_3e8fc_row0_col1" class="data row0 col1" >10629</td>
+      <td id="T_3e8fc_row0_col2" class="data row0 col2" >GGCGCGC</td>
+      <td id="T_3e8fc_row0_col3" class="data row0 col3" >GGCGC</td>
+      <td id="T_3e8fc_row0_col4" class="data row0 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_3e8fc_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_3e8fc_row1_col0" class="data row1 col0" >chr1</td>
+      <td id="T_3e8fc_row1_col1" class="data row1 col1" >998764</td>
+      <td id="T_3e8fc_row1_col2" class="data row1 col2" >C</td>
+      <td id="T_3e8fc_row1_col3" class="data row1 col3" >G</td>
+      <td id="T_3e8fc_row1_col4" class="data row1 col4" >0.500000</td>
+    </tr>
+    <tr>
+      <th id="T_3e8fc_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_3e8fc_row2_col0" class="data row2 col0" >chr1</td>
+      <td id="T_3e8fc_row2_col1" class="data row2 col1" >998764</td>
+      <td id="T_3e8fc_row2_col2" class="data row2 col2" >CGGAGGG</td>
+      <td id="T_3e8fc_row2_col3" class="data row2 col3" >CGGAGGGGAGGG</td>
+      <td id="T_3e8fc_row2_col4" class="data row2 col4" >0.312500</td>
+    </tr>
+    <tr>
+      <th id="T_3e8fc_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_3e8fc_row3_col0" class="data row3 col0" >chr1</td>
+      <td id="T_3e8fc_row3_col1" class="data row3 col1" >1041101</td>
+      <td id="T_3e8fc_row3_col2" class="data row3 col2" >CGGAGCGGGGCGGGAGCGGGGCGGGAGCGGGG</td>
+      <td id="T_3e8fc_row3_col3" class="data row3 col3" >CGGAGCGGGGCGGGAGCGGGG</td>
+      <td id="T_3e8fc_row3_col4" class="data row3 col4" >0.500000</td>
+    </tr>
+    <tr>
+      <th id="T_3e8fc_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_3e8fc_row4_col0" class="data row4 col0" >chr1</td>
+      <td id="T_3e8fc_row4_col1" class="data row4 col1" >1164837</td>
+      <td id="T_3e8fc_row4_col2" class="data row4 col2" >C</td>
+      <td id="T_3e8fc_row4_col3" class="data row4 col3" >T</td>
+      <td id="T_3e8fc_row4_col4" class="data row4 col4" >0.812500</td>
+    </tr>
+  </tbody>
+</table>
 
 The file above corresponds to just one of the sample IDs in this
 pan-cancer study. To load up all the mutation data for all samples, we
@@ -210,22 +415,29 @@ import pyranges as pr
 gr_fpscore = pr.PyRanges(df_fpscore)
 ```
 
-<style type="text/css">
-#T_11f8c th {
-  font-size: 8pt;
-}
-#T_11f8c_row0_col0, #T_11f8c_row0_col1, #T_11f8c_row0_col2, #T_11f8c_row0_col3, #T_11f8c_row0_col4, #T_11f8c_row0_col5, #T_11f8c_row0_col6, #T_11f8c_row0_col7, #T_11f8c_row1_col0, #T_11f8c_row1_col1, #T_11f8c_row1_col2, #T_11f8c_row1_col3, #T_11f8c_row1_col4, #T_11f8c_row1_col5, #T_11f8c_row1_col6, #T_11f8c_row1_col7, #T_11f8c_row2_col0, #T_11f8c_row2_col1, #T_11f8c_row2_col2, #T_11f8c_row2_col3, #T_11f8c_row2_col4, #T_11f8c_row2_col5, #T_11f8c_row2_col6, #T_11f8c_row2_col7, #T_11f8c_row3_col0, #T_11f8c_row3_col1, #T_11f8c_row3_col2, #T_11f8c_row3_col3, #T_11f8c_row3_col4, #T_11f8c_row3_col5, #T_11f8c_row3_col6, #T_11f8c_row3_col7, #T_11f8c_row4_col0, #T_11f8c_row4_col1, #T_11f8c_row4_col2, #T_11f8c_row4_col3, #T_11f8c_row4_col4, #T_11f8c_row4_col5, #T_11f8c_row4_col6, #T_11f8c_row4_col7 {
-  font-size: 10pt;
-}
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+&#10;    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+&#10;    .dataframe thead th {
+        text-align: right;
+    }
 </style>
 
-| Chromosome | Start  | End    | 98JKPD8 LumA fps | ANAB5F7 Basal fps | S6R691V Her2 fps | PU24GB8 LumB fps | 2GAMBDQ Norm fps |
-|------------|--------|--------|------------------|-------------------|------------------|------------------|------------------|
-| chr1       | 10628  | 10638  | 0.0              | 0.0               | 0.0              | 0.0              | 0.0              |
-| chr1       | 181224 | 181234 | 0.0              | 0.0               | 0.0              | 0.0              | 0.0              |
-| chr1       | 779214 | 779224 | 0.0              | 0.0               | 0.0              | 0.0              | 0.0              |
-| chr1       | 998754 | 998764 | 0.1376           | 0.14035           | 0.12842          | 0.145            | 0.1051           |
-| chr1       | 998768 | 998778 | 0.18224          | 0.16708           | 0.16911          | 0.18302          | 0.12759          |
+|     | Chromosome | Start  | End    | ... | S6R691V_Her2_fps | PU24GB8_LumB_fps | 2GAMBDQ_Norm_fps |
+|-----|------------|--------|--------|-----|------------------|------------------|------------------|
+| 0   | chr1       | 10628  | 10638  | ... | 0.00000          | 0.00000          | 0.00000          |
+| 1   | chr1       | 181224 | 181234 | ... | 0.00000          | 0.00000          | 0.00000          |
+| 2   | chr1       | 779214 | 779224 | ... | 0.00000          | 0.00000          | 0.00000          |
+| 3   | chr1       | 998754 | 998764 | ... | 0.12842          | 0.14500          | 0.10510          |
+| 4   | chr1       | 998768 | 998778 | ... | 0.16911          | 0.18302          | 0.12759          |
+
+<p>5 rows × 8 columns</p>
+</div>
 
 Do the same for the mutation dataframes in the dictionary. Loop through
 it and save them in a new dictionary.
@@ -326,21 +538,205 @@ final_df = final_df.rename(columns=lambda x: x.split('_')[0] + '_' + x.split('_'
 A slice of the final dataframe is shown below.
 
 <style type="text/css">
-#T_93dfd th {
-  font-size: 8pt;
-}
-#T_93dfd_row0_col0, #T_93dfd_row0_col1, #T_93dfd_row0_col2, #T_93dfd_row0_col3, #T_93dfd_row0_col4, #T_93dfd_row0_col5, #T_93dfd_row0_col6, #T_93dfd_row0_col7, #T_93dfd_row0_col8, #T_93dfd_row0_col9, #T_93dfd_row0_col10, #T_93dfd_row0_col11, #T_93dfd_row0_col12, #T_93dfd_row0_col13, #T_93dfd_row0_col14, #T_93dfd_row0_col15, #T_93dfd_row0_col16, #T_93dfd_row0_col17, #T_93dfd_row0_col18, #T_93dfd_row0_col19, #T_93dfd_row0_col20, #T_93dfd_row0_col21, #T_93dfd_row0_col22, #T_93dfd_row0_col23, #T_93dfd_row0_col24, #T_93dfd_row0_col25, #T_93dfd_row0_col26, #T_93dfd_row0_col27, #T_93dfd_row0_col28, #T_93dfd_row1_col0, #T_93dfd_row1_col1, #T_93dfd_row1_col2, #T_93dfd_row1_col3, #T_93dfd_row1_col4, #T_93dfd_row1_col5, #T_93dfd_row1_col6, #T_93dfd_row1_col7, #T_93dfd_row1_col8, #T_93dfd_row1_col9, #T_93dfd_row1_col10, #T_93dfd_row1_col11, #T_93dfd_row1_col12, #T_93dfd_row1_col13, #T_93dfd_row1_col14, #T_93dfd_row1_col15, #T_93dfd_row1_col16, #T_93dfd_row1_col17, #T_93dfd_row1_col18, #T_93dfd_row1_col19, #T_93dfd_row1_col20, #T_93dfd_row1_col21, #T_93dfd_row1_col22, #T_93dfd_row1_col23, #T_93dfd_row1_col24, #T_93dfd_row1_col25, #T_93dfd_row1_col26, #T_93dfd_row1_col27, #T_93dfd_row1_col28, #T_93dfd_row2_col0, #T_93dfd_row2_col1, #T_93dfd_row2_col2, #T_93dfd_row2_col3, #T_93dfd_row2_col4, #T_93dfd_row2_col5, #T_93dfd_row2_col6, #T_93dfd_row2_col7, #T_93dfd_row2_col8, #T_93dfd_row2_col9, #T_93dfd_row2_col10, #T_93dfd_row2_col11, #T_93dfd_row2_col12, #T_93dfd_row2_col13, #T_93dfd_row2_col14, #T_93dfd_row2_col15, #T_93dfd_row2_col16, #T_93dfd_row2_col17, #T_93dfd_row2_col18, #T_93dfd_row2_col19, #T_93dfd_row2_col20, #T_93dfd_row2_col21, #T_93dfd_row2_col22, #T_93dfd_row2_col23, #T_93dfd_row2_col24, #T_93dfd_row2_col25, #T_93dfd_row2_col26, #T_93dfd_row2_col27, #T_93dfd_row2_col28, #T_93dfd_row3_col0, #T_93dfd_row3_col1, #T_93dfd_row3_col2, #T_93dfd_row3_col3, #T_93dfd_row3_col4, #T_93dfd_row3_col5, #T_93dfd_row3_col6, #T_93dfd_row3_col7, #T_93dfd_row3_col8, #T_93dfd_row3_col9, #T_93dfd_row3_col10, #T_93dfd_row3_col11, #T_93dfd_row3_col12, #T_93dfd_row3_col13, #T_93dfd_row3_col14, #T_93dfd_row3_col15, #T_93dfd_row3_col16, #T_93dfd_row3_col17, #T_93dfd_row3_col18, #T_93dfd_row3_col19, #T_93dfd_row3_col20, #T_93dfd_row3_col21, #T_93dfd_row3_col22, #T_93dfd_row3_col23, #T_93dfd_row3_col24, #T_93dfd_row3_col25, #T_93dfd_row3_col26, #T_93dfd_row3_col27, #T_93dfd_row3_col28, #T_93dfd_row4_col0, #T_93dfd_row4_col1, #T_93dfd_row4_col2, #T_93dfd_row4_col3, #T_93dfd_row4_col4, #T_93dfd_row4_col5, #T_93dfd_row4_col6, #T_93dfd_row4_col7, #T_93dfd_row4_col8, #T_93dfd_row4_col9, #T_93dfd_row4_col10, #T_93dfd_row4_col11, #T_93dfd_row4_col12, #T_93dfd_row4_col13, #T_93dfd_row4_col14, #T_93dfd_row4_col15, #T_93dfd_row4_col16, #T_93dfd_row4_col17, #T_93dfd_row4_col18, #T_93dfd_row4_col19, #T_93dfd_row4_col20, #T_93dfd_row4_col21, #T_93dfd_row4_col22, #T_93dfd_row4_col23, #T_93dfd_row4_col24, #T_93dfd_row4_col25, #T_93dfd_row4_col26, #T_93dfd_row4_col27, #T_93dfd_row4_col28 {
-  font-size: 8pt;
-}
 </style>
-
-|     | Chromosome | Start  | End    | 98JKPD8 lumA fps | ANAB5F7 basal fps | S6R691V her2 fps | PU24GB8 lumB fps | 2GAMBDQ norm fps | ANAB5F7 basal varsite pos | ANAB5F7 basal REF | ANAB5F7 basal ALT | ANAB5F7 basal AF | 98JKPD8 lumA varsite pos | 98JKPD8 lumA REF | 98JKPD8 lumA ALT | 98JKPD8 lumA AF | PU24GB8 lumB varsite pos | PU24GB8 lumB REF | PU24GB8 lumB ALT | PU24GB8 lumB AF | S6R691V her2 varsite pos | S6R691V her2 REF | S6R691V her2 ALT | S6R691V her2 AF | 2GAMBDQ norm varsite pos | 2GAMBDQ norm REF | 2GAMBDQ norm ALT | 2GAMBDQ norm AF | region id          |
-|-----|------------|--------|--------|------------------|-------------------|------------------|------------------|------------------|---------------------------|-------------------|-------------------|------------------|--------------------------|------------------|------------------|-----------------|--------------------------|------------------|------------------|-----------------|--------------------------|------------------|------------------|-----------------|--------------------------|------------------|------------------|-----------------|--------------------|
-| 0   | chr1       | 10628  | 10638  | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | 10629                     | GGCGCGC           | GGCGC             | 1.000000         | 10629                    | GGCGCGC          | GGCGC            | 0.958333        | 10629                    | GGCGCGC          | GGCGC            | 1.000000        | 10629                    | GGCGCGC          | GGCGC            | 1.000000        | 10629                    | GGCGCGC          | GGCGC            | 1.000000        | chr1:10628-10638   |
-| 1   | chr1       | 181224 | 181234 | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | None                      | None              | None              | 0.000000         | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | chr1:181224-181234 |
-| 2   | chr1       | 779214 | 779224 | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | 779216                    | T                 | C                 | 0.029412         | 779216                   | T                | C                | 0.125000        | 779216                   | T                | C                | 0.026316        | 779216                   | T                | C                | 0.058824        | None                     | None             | None             | 0.000000        | chr1:779214-779224 |
-| 3   | chr1       | 998754 | 998764 | 0.137600         | 0.140350          | 0.128420         | 0.145000         | 0.105100         | None                      | None              | None              | 0.000000         | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | chr1:998754-998764 |
-| 4   | chr1       | 998768 | 998778 | 0.182240         | 0.167080          | 0.169110         | 0.183020         | 0.127590         | None                      | None              | None              | 0.000000         | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | None                     | None             | None             | 0.000000        | chr1:998768-998778 |
+<table id="T_8c0c1" data-quarto-disable-processing="true">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_8c0c1_level0_col0" class="col_heading level0 col0" >Chromosome</th>
+      <th id="T_8c0c1_level0_col1" class="col_heading level0 col1" >Start</th>
+      <th id="T_8c0c1_level0_col2" class="col_heading level0 col2" >End</th>
+      <th id="T_8c0c1_level0_col3" class="col_heading level0 col3" >98JKPD8_lumA_fps</th>
+      <th id="T_8c0c1_level0_col4" class="col_heading level0 col4" >ANAB5F7_basal_fps</th>
+      <th id="T_8c0c1_level0_col5" class="col_heading level0 col5" >S6R691V_her2_fps</th>
+      <th id="T_8c0c1_level0_col6" class="col_heading level0 col6" >PU24GB8_lumB_fps</th>
+      <th id="T_8c0c1_level0_col7" class="col_heading level0 col7" >2GAMBDQ_norm_fps</th>
+      <th id="T_8c0c1_level0_col8" class="col_heading level0 col8" >ANAB5F7_basal_varsite_pos</th>
+      <th id="T_8c0c1_level0_col9" class="col_heading level0 col9" >ANAB5F7_basal_REF</th>
+      <th id="T_8c0c1_level0_col10" class="col_heading level0 col10" >ANAB5F7_basal_ALT</th>
+      <th id="T_8c0c1_level0_col11" class="col_heading level0 col11" >ANAB5F7_basal_AF</th>
+      <th id="T_8c0c1_level0_col12" class="col_heading level0 col12" >98JKPD8_lumA_varsite_pos</th>
+      <th id="T_8c0c1_level0_col13" class="col_heading level0 col13" >98JKPD8_lumA_REF</th>
+      <th id="T_8c0c1_level0_col14" class="col_heading level0 col14" >98JKPD8_lumA_ALT</th>
+      <th id="T_8c0c1_level0_col15" class="col_heading level0 col15" >98JKPD8_lumA_AF</th>
+      <th id="T_8c0c1_level0_col16" class="col_heading level0 col16" >PU24GB8_lumB_varsite_pos</th>
+      <th id="T_8c0c1_level0_col17" class="col_heading level0 col17" >PU24GB8_lumB_REF</th>
+      <th id="T_8c0c1_level0_col18" class="col_heading level0 col18" >PU24GB8_lumB_ALT</th>
+      <th id="T_8c0c1_level0_col19" class="col_heading level0 col19" >PU24GB8_lumB_AF</th>
+      <th id="T_8c0c1_level0_col20" class="col_heading level0 col20" >S6R691V_her2_varsite_pos</th>
+      <th id="T_8c0c1_level0_col21" class="col_heading level0 col21" >S6R691V_her2_REF</th>
+      <th id="T_8c0c1_level0_col22" class="col_heading level0 col22" >S6R691V_her2_ALT</th>
+      <th id="T_8c0c1_level0_col23" class="col_heading level0 col23" >S6R691V_her2_AF</th>
+      <th id="T_8c0c1_level0_col24" class="col_heading level0 col24" >2GAMBDQ_norm_varsite_pos</th>
+      <th id="T_8c0c1_level0_col25" class="col_heading level0 col25" >2GAMBDQ_norm_REF</th>
+      <th id="T_8c0c1_level0_col26" class="col_heading level0 col26" >2GAMBDQ_norm_ALT</th>
+      <th id="T_8c0c1_level0_col27" class="col_heading level0 col27" >2GAMBDQ_norm_AF</th>
+      <th id="T_8c0c1_level0_col28" class="col_heading level0 col28" >region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_8c0c1_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_8c0c1_row0_col0" class="data row0 col0" >chr1</td>
+      <td id="T_8c0c1_row0_col1" class="data row0 col1" >10628</td>
+      <td id="T_8c0c1_row0_col2" class="data row0 col2" >10638</td>
+      <td id="T_8c0c1_row0_col3" class="data row0 col3" >0.000000</td>
+      <td id="T_8c0c1_row0_col4" class="data row0 col4" >0.000000</td>
+      <td id="T_8c0c1_row0_col5" class="data row0 col5" >0.000000</td>
+      <td id="T_8c0c1_row0_col6" class="data row0 col6" >0.000000</td>
+      <td id="T_8c0c1_row0_col7" class="data row0 col7" >0.000000</td>
+      <td id="T_8c0c1_row0_col8" class="data row0 col8" >10629</td>
+      <td id="T_8c0c1_row0_col9" class="data row0 col9" >GGCGCGC</td>
+      <td id="T_8c0c1_row0_col10" class="data row0 col10" >GGCGC</td>
+      <td id="T_8c0c1_row0_col11" class="data row0 col11" >1.000000</td>
+      <td id="T_8c0c1_row0_col12" class="data row0 col12" >10629</td>
+      <td id="T_8c0c1_row0_col13" class="data row0 col13" >GGCGCGC</td>
+      <td id="T_8c0c1_row0_col14" class="data row0 col14" >GGCGC</td>
+      <td id="T_8c0c1_row0_col15" class="data row0 col15" >0.958333</td>
+      <td id="T_8c0c1_row0_col16" class="data row0 col16" >10629</td>
+      <td id="T_8c0c1_row0_col17" class="data row0 col17" >GGCGCGC</td>
+      <td id="T_8c0c1_row0_col18" class="data row0 col18" >GGCGC</td>
+      <td id="T_8c0c1_row0_col19" class="data row0 col19" >1.000000</td>
+      <td id="T_8c0c1_row0_col20" class="data row0 col20" >10629</td>
+      <td id="T_8c0c1_row0_col21" class="data row0 col21" >GGCGCGC</td>
+      <td id="T_8c0c1_row0_col22" class="data row0 col22" >GGCGC</td>
+      <td id="T_8c0c1_row0_col23" class="data row0 col23" >1.000000</td>
+      <td id="T_8c0c1_row0_col24" class="data row0 col24" >10629</td>
+      <td id="T_8c0c1_row0_col25" class="data row0 col25" >GGCGCGC</td>
+      <td id="T_8c0c1_row0_col26" class="data row0 col26" >GGCGC</td>
+      <td id="T_8c0c1_row0_col27" class="data row0 col27" >1.000000</td>
+      <td id="T_8c0c1_row0_col28" class="data row0 col28" >chr1:10628-10638</td>
+    </tr>
+    <tr>
+      <th id="T_8c0c1_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_8c0c1_row1_col0" class="data row1 col0" >chr1</td>
+      <td id="T_8c0c1_row1_col1" class="data row1 col1" >181224</td>
+      <td id="T_8c0c1_row1_col2" class="data row1 col2" >181234</td>
+      <td id="T_8c0c1_row1_col3" class="data row1 col3" >0.000000</td>
+      <td id="T_8c0c1_row1_col4" class="data row1 col4" >0.000000</td>
+      <td id="T_8c0c1_row1_col5" class="data row1 col5" >0.000000</td>
+      <td id="T_8c0c1_row1_col6" class="data row1 col6" >0.000000</td>
+      <td id="T_8c0c1_row1_col7" class="data row1 col7" >0.000000</td>
+      <td id="T_8c0c1_row1_col8" class="data row1 col8" >None</td>
+      <td id="T_8c0c1_row1_col9" class="data row1 col9" >None</td>
+      <td id="T_8c0c1_row1_col10" class="data row1 col10" >None</td>
+      <td id="T_8c0c1_row1_col11" class="data row1 col11" >0.000000</td>
+      <td id="T_8c0c1_row1_col12" class="data row1 col12" >None</td>
+      <td id="T_8c0c1_row1_col13" class="data row1 col13" >None</td>
+      <td id="T_8c0c1_row1_col14" class="data row1 col14" >None</td>
+      <td id="T_8c0c1_row1_col15" class="data row1 col15" >0.000000</td>
+      <td id="T_8c0c1_row1_col16" class="data row1 col16" >None</td>
+      <td id="T_8c0c1_row1_col17" class="data row1 col17" >None</td>
+      <td id="T_8c0c1_row1_col18" class="data row1 col18" >None</td>
+      <td id="T_8c0c1_row1_col19" class="data row1 col19" >0.000000</td>
+      <td id="T_8c0c1_row1_col20" class="data row1 col20" >None</td>
+      <td id="T_8c0c1_row1_col21" class="data row1 col21" >None</td>
+      <td id="T_8c0c1_row1_col22" class="data row1 col22" >None</td>
+      <td id="T_8c0c1_row1_col23" class="data row1 col23" >0.000000</td>
+      <td id="T_8c0c1_row1_col24" class="data row1 col24" >None</td>
+      <td id="T_8c0c1_row1_col25" class="data row1 col25" >None</td>
+      <td id="T_8c0c1_row1_col26" class="data row1 col26" >None</td>
+      <td id="T_8c0c1_row1_col27" class="data row1 col27" >0.000000</td>
+      <td id="T_8c0c1_row1_col28" class="data row1 col28" >chr1:181224-181234</td>
+    </tr>
+    <tr>
+      <th id="T_8c0c1_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_8c0c1_row2_col0" class="data row2 col0" >chr1</td>
+      <td id="T_8c0c1_row2_col1" class="data row2 col1" >779214</td>
+      <td id="T_8c0c1_row2_col2" class="data row2 col2" >779224</td>
+      <td id="T_8c0c1_row2_col3" class="data row2 col3" >0.000000</td>
+      <td id="T_8c0c1_row2_col4" class="data row2 col4" >0.000000</td>
+      <td id="T_8c0c1_row2_col5" class="data row2 col5" >0.000000</td>
+      <td id="T_8c0c1_row2_col6" class="data row2 col6" >0.000000</td>
+      <td id="T_8c0c1_row2_col7" class="data row2 col7" >0.000000</td>
+      <td id="T_8c0c1_row2_col8" class="data row2 col8" >779216</td>
+      <td id="T_8c0c1_row2_col9" class="data row2 col9" >T</td>
+      <td id="T_8c0c1_row2_col10" class="data row2 col10" >C</td>
+      <td id="T_8c0c1_row2_col11" class="data row2 col11" >0.029412</td>
+      <td id="T_8c0c1_row2_col12" class="data row2 col12" >779216</td>
+      <td id="T_8c0c1_row2_col13" class="data row2 col13" >T</td>
+      <td id="T_8c0c1_row2_col14" class="data row2 col14" >C</td>
+      <td id="T_8c0c1_row2_col15" class="data row2 col15" >0.125000</td>
+      <td id="T_8c0c1_row2_col16" class="data row2 col16" >779216</td>
+      <td id="T_8c0c1_row2_col17" class="data row2 col17" >T</td>
+      <td id="T_8c0c1_row2_col18" class="data row2 col18" >C</td>
+      <td id="T_8c0c1_row2_col19" class="data row2 col19" >0.026316</td>
+      <td id="T_8c0c1_row2_col20" class="data row2 col20" >779216</td>
+      <td id="T_8c0c1_row2_col21" class="data row2 col21" >T</td>
+      <td id="T_8c0c1_row2_col22" class="data row2 col22" >C</td>
+      <td id="T_8c0c1_row2_col23" class="data row2 col23" >0.058824</td>
+      <td id="T_8c0c1_row2_col24" class="data row2 col24" >None</td>
+      <td id="T_8c0c1_row2_col25" class="data row2 col25" >None</td>
+      <td id="T_8c0c1_row2_col26" class="data row2 col26" >None</td>
+      <td id="T_8c0c1_row2_col27" class="data row2 col27" >0.000000</td>
+      <td id="T_8c0c1_row2_col28" class="data row2 col28" >chr1:779214-779224</td>
+    </tr>
+    <tr>
+      <th id="T_8c0c1_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_8c0c1_row3_col0" class="data row3 col0" >chr1</td>
+      <td id="T_8c0c1_row3_col1" class="data row3 col1" >998754</td>
+      <td id="T_8c0c1_row3_col2" class="data row3 col2" >998764</td>
+      <td id="T_8c0c1_row3_col3" class="data row3 col3" >0.137600</td>
+      <td id="T_8c0c1_row3_col4" class="data row3 col4" >0.140350</td>
+      <td id="T_8c0c1_row3_col5" class="data row3 col5" >0.128420</td>
+      <td id="T_8c0c1_row3_col6" class="data row3 col6" >0.145000</td>
+      <td id="T_8c0c1_row3_col7" class="data row3 col7" >0.105100</td>
+      <td id="T_8c0c1_row3_col8" class="data row3 col8" >None</td>
+      <td id="T_8c0c1_row3_col9" class="data row3 col9" >None</td>
+      <td id="T_8c0c1_row3_col10" class="data row3 col10" >None</td>
+      <td id="T_8c0c1_row3_col11" class="data row3 col11" >0.000000</td>
+      <td id="T_8c0c1_row3_col12" class="data row3 col12" >None</td>
+      <td id="T_8c0c1_row3_col13" class="data row3 col13" >None</td>
+      <td id="T_8c0c1_row3_col14" class="data row3 col14" >None</td>
+      <td id="T_8c0c1_row3_col15" class="data row3 col15" >0.000000</td>
+      <td id="T_8c0c1_row3_col16" class="data row3 col16" >None</td>
+      <td id="T_8c0c1_row3_col17" class="data row3 col17" >None</td>
+      <td id="T_8c0c1_row3_col18" class="data row3 col18" >None</td>
+      <td id="T_8c0c1_row3_col19" class="data row3 col19" >0.000000</td>
+      <td id="T_8c0c1_row3_col20" class="data row3 col20" >None</td>
+      <td id="T_8c0c1_row3_col21" class="data row3 col21" >None</td>
+      <td id="T_8c0c1_row3_col22" class="data row3 col22" >None</td>
+      <td id="T_8c0c1_row3_col23" class="data row3 col23" >0.000000</td>
+      <td id="T_8c0c1_row3_col24" class="data row3 col24" >None</td>
+      <td id="T_8c0c1_row3_col25" class="data row3 col25" >None</td>
+      <td id="T_8c0c1_row3_col26" class="data row3 col26" >None</td>
+      <td id="T_8c0c1_row3_col27" class="data row3 col27" >0.000000</td>
+      <td id="T_8c0c1_row3_col28" class="data row3 col28" >chr1:998754-998764</td>
+    </tr>
+    <tr>
+      <th id="T_8c0c1_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_8c0c1_row4_col0" class="data row4 col0" >chr1</td>
+      <td id="T_8c0c1_row4_col1" class="data row4 col1" >998768</td>
+      <td id="T_8c0c1_row4_col2" class="data row4 col2" >998778</td>
+      <td id="T_8c0c1_row4_col3" class="data row4 col3" >0.182240</td>
+      <td id="T_8c0c1_row4_col4" class="data row4 col4" >0.167080</td>
+      <td id="T_8c0c1_row4_col5" class="data row4 col5" >0.169110</td>
+      <td id="T_8c0c1_row4_col6" class="data row4 col6" >0.183020</td>
+      <td id="T_8c0c1_row4_col7" class="data row4 col7" >0.127590</td>
+      <td id="T_8c0c1_row4_col8" class="data row4 col8" >None</td>
+      <td id="T_8c0c1_row4_col9" class="data row4 col9" >None</td>
+      <td id="T_8c0c1_row4_col10" class="data row4 col10" >None</td>
+      <td id="T_8c0c1_row4_col11" class="data row4 col11" >0.000000</td>
+      <td id="T_8c0c1_row4_col12" class="data row4 col12" >None</td>
+      <td id="T_8c0c1_row4_col13" class="data row4 col13" >None</td>
+      <td id="T_8c0c1_row4_col14" class="data row4 col14" >None</td>
+      <td id="T_8c0c1_row4_col15" class="data row4 col15" >0.000000</td>
+      <td id="T_8c0c1_row4_col16" class="data row4 col16" >None</td>
+      <td id="T_8c0c1_row4_col17" class="data row4 col17" >None</td>
+      <td id="T_8c0c1_row4_col18" class="data row4 col18" >None</td>
+      <td id="T_8c0c1_row4_col19" class="data row4 col19" >0.000000</td>
+      <td id="T_8c0c1_row4_col20" class="data row4 col20" >None</td>
+      <td id="T_8c0c1_row4_col21" class="data row4 col21" >None</td>
+      <td id="T_8c0c1_row4_col22" class="data row4 col22" >None</td>
+      <td id="T_8c0c1_row4_col23" class="data row4 col23" >0.000000</td>
+      <td id="T_8c0c1_row4_col24" class="data row4 col24" >None</td>
+      <td id="T_8c0c1_row4_col25" class="data row4 col25" >None</td>
+      <td id="T_8c0c1_row4_col26" class="data row4 col26" >None</td>
+      <td id="T_8c0c1_row4_col27" class="data row4 col27" >0.000000</td>
+      <td id="T_8c0c1_row4_col28" class="data row4 col28" >chr1:998768-998778</td>
+    </tr>
+  </tbody>
+</table>
 
 The final dataframe here is saved as a tab-delimited text file in
 `demo-data/` with the filename suffix
@@ -367,18 +763,205 @@ print(f"The motif ID of the current TF data: {motif_id} \n")
     The motif ID of the current TF data: E2F2_E2F2_HUMAN.H11MO.0.B 
 
 <style type="text/css">
-#T_599fc_row0_col0, #T_599fc_row0_col1, #T_599fc_row0_col2, #T_599fc_row0_col3, #T_599fc_row0_col4, #T_599fc_row0_col5, #T_599fc_row0_col6, #T_599fc_row0_col7, #T_599fc_row0_col8, #T_599fc_row0_col9, #T_599fc_row0_col10, #T_599fc_row0_col11, #T_599fc_row0_col12, #T_599fc_row0_col13, #T_599fc_row0_col14, #T_599fc_row0_col15, #T_599fc_row0_col16, #T_599fc_row0_col17, #T_599fc_row0_col18, #T_599fc_row0_col19, #T_599fc_row0_col20, #T_599fc_row0_col21, #T_599fc_row0_col22, #T_599fc_row0_col23, #T_599fc_row0_col24, #T_599fc_row0_col25, #T_599fc_row0_col26, #T_599fc_row0_col27, #T_599fc_row0_col28, #T_599fc_row1_col0, #T_599fc_row1_col1, #T_599fc_row1_col2, #T_599fc_row1_col3, #T_599fc_row1_col4, #T_599fc_row1_col5, #T_599fc_row1_col6, #T_599fc_row1_col7, #T_599fc_row1_col8, #T_599fc_row1_col9, #T_599fc_row1_col10, #T_599fc_row1_col11, #T_599fc_row1_col12, #T_599fc_row1_col13, #T_599fc_row1_col14, #T_599fc_row1_col15, #T_599fc_row1_col16, #T_599fc_row1_col17, #T_599fc_row1_col18, #T_599fc_row1_col19, #T_599fc_row1_col20, #T_599fc_row1_col21, #T_599fc_row1_col22, #T_599fc_row1_col23, #T_599fc_row1_col24, #T_599fc_row1_col25, #T_599fc_row1_col26, #T_599fc_row1_col27, #T_599fc_row1_col28, #T_599fc_row2_col0, #T_599fc_row2_col1, #T_599fc_row2_col2, #T_599fc_row2_col3, #T_599fc_row2_col4, #T_599fc_row2_col5, #T_599fc_row2_col6, #T_599fc_row2_col7, #T_599fc_row2_col8, #T_599fc_row2_col9, #T_599fc_row2_col10, #T_599fc_row2_col11, #T_599fc_row2_col12, #T_599fc_row2_col13, #T_599fc_row2_col14, #T_599fc_row2_col15, #T_599fc_row2_col16, #T_599fc_row2_col17, #T_599fc_row2_col18, #T_599fc_row2_col19, #T_599fc_row2_col20, #T_599fc_row2_col21, #T_599fc_row2_col22, #T_599fc_row2_col23, #T_599fc_row2_col24, #T_599fc_row2_col25, #T_599fc_row2_col26, #T_599fc_row2_col27, #T_599fc_row2_col28, #T_599fc_row3_col0, #T_599fc_row3_col1, #T_599fc_row3_col2, #T_599fc_row3_col3, #T_599fc_row3_col4, #T_599fc_row3_col5, #T_599fc_row3_col6, #T_599fc_row3_col7, #T_599fc_row3_col8, #T_599fc_row3_col9, #T_599fc_row3_col10, #T_599fc_row3_col11, #T_599fc_row3_col12, #T_599fc_row3_col13, #T_599fc_row3_col14, #T_599fc_row3_col15, #T_599fc_row3_col16, #T_599fc_row3_col17, #T_599fc_row3_col18, #T_599fc_row3_col19, #T_599fc_row3_col20, #T_599fc_row3_col21, #T_599fc_row3_col22, #T_599fc_row3_col23, #T_599fc_row3_col24, #T_599fc_row3_col25, #T_599fc_row3_col26, #T_599fc_row3_col27, #T_599fc_row3_col28, #T_599fc_row4_col0, #T_599fc_row4_col1, #T_599fc_row4_col2, #T_599fc_row4_col3, #T_599fc_row4_col4, #T_599fc_row4_col5, #T_599fc_row4_col6, #T_599fc_row4_col7, #T_599fc_row4_col8, #T_599fc_row4_col9, #T_599fc_row4_col10, #T_599fc_row4_col11, #T_599fc_row4_col12, #T_599fc_row4_col13, #T_599fc_row4_col14, #T_599fc_row4_col15, #T_599fc_row4_col16, #T_599fc_row4_col17, #T_599fc_row4_col18, #T_599fc_row4_col19, #T_599fc_row4_col20, #T_599fc_row4_col21, #T_599fc_row4_col22, #T_599fc_row4_col23, #T_599fc_row4_col24, #T_599fc_row4_col25, #T_599fc_row4_col26, #T_599fc_row4_col27, #T_599fc_row4_col28 {
-  font-size: 10pt;
-}
 </style>
-
-| Chromosome | Start  | End    | 98JKPD8 lumA fps | ANAB5F7 basal fps | S6R691V her2 fps | PU24GB8 lumB fps | 2GAMBDQ norm fps | 2GAMBDQ norm varsite pos | 2GAMBDQ norm ref allele | 2GAMBDQ norm alt allele | 2GAMBDQ norm AF | 98JKPD8 lumA varsite pos | 98JKPD8 lumA ref allele | 98JKPD8 lumA alt allele | 98JKPD8 lumA AF | ANAB5F7 basal varsite pos | ANAB5F7 basal ref allele | ANAB5F7 basal alt allele | ANAB5F7 basal AF | PU24GB8 lumB varsite pos | PU24GB8 lumB ref allele | PU24GB8 lumB alt allele | PU24GB8 lumB AF | S6R691V her2 varsite pos | S6R691V her2 ref allele | S6R691V her2 alt allele | S6R691V her2 AF | region id          |
-|------------|--------|--------|------------------|-------------------|------------------|------------------|------------------|--------------------------|-------------------------|-------------------------|-----------------|--------------------------|-------------------------|-------------------------|-----------------|---------------------------|--------------------------|--------------------------|------------------|--------------------------|-------------------------|-------------------------|-----------------|--------------------------|-------------------------|-------------------------|-----------------|--------------------|
-| chr1       | 10628  | 10638  | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | 10629.000000             | GGCGCGC                 | GGCGC                   | 1.000000        | 10629.000000             | GGCGCGC                 | GGCGC                   | 0.958333        | 10629.000000              | GGCGCGC                  | GGCGC                    | 1.000000         | 10629.000000             | GGCGCGC                 | GGCGC                   | 1.000000        | 10629.000000             | GGCGCGC                 | GGCGC                   | 1.000000        | chr1:10628-10638   |
-| chr1       | 181224 | 181234 | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | nan                      | nan                     | nan                     | 0.000000        | nan                      | nan                     | nan                     | 0.000000        | nan                       | nan                      | nan                      | 0.000000         | nan                      | nan                     | nan                     | 0.000000        | nan                      | nan                     | nan                     | 0.000000        | chr1:181224-181234 |
-| chr1       | 779214 | 779224 | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | nan                      | nan                     | nan                     | 0.000000        | 779216.000000            | T                       | C                       | 0.125000        | 779216.000000             | T                        | C                        | 0.029412         | 779216.000000            | T                       | C                       | 0.026316        | 779216.000000            | T                       | C                       | 0.058824        | chr1:779214-779224 |
-| chr1       | 998754 | 998764 | 0.137600         | 0.140350          | 0.128420         | 0.145000         | 0.105100         | nan                      | nan                     | nan                     | 0.000000        | nan                      | nan                     | nan                     | 0.000000        | nan                       | nan                      | nan                      | 0.000000         | nan                      | nan                     | nan                     | 0.000000        | nan                      | nan                     | nan                     | 0.000000        | chr1:998754-998764 |
-| chr1       | 998768 | 998778 | 0.182240         | 0.167080          | 0.169110         | 0.183020         | 0.127590         | nan                      | nan                     | nan                     | 0.000000        | nan                      | nan                     | nan                     | 0.000000        | nan                       | nan                      | nan                      | 0.000000         | nan                      | nan                     | nan                     | 0.000000        | nan                      | nan                     | nan                     | 0.000000        | chr1:998768-998778 |
+<table id="T_9be5d" data-quarto-disable-processing="true">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_9be5d_level0_col0" class="col_heading level0 col0" >Chromosome</th>
+      <th id="T_9be5d_level0_col1" class="col_heading level0 col1" >Start</th>
+      <th id="T_9be5d_level0_col2" class="col_heading level0 col2" >End</th>
+      <th id="T_9be5d_level0_col3" class="col_heading level0 col3" >98JKPD8_lumA_fps</th>
+      <th id="T_9be5d_level0_col4" class="col_heading level0 col4" >ANAB5F7_basal_fps</th>
+      <th id="T_9be5d_level0_col5" class="col_heading level0 col5" >S6R691V_her2_fps</th>
+      <th id="T_9be5d_level0_col6" class="col_heading level0 col6" >PU24GB8_lumB_fps</th>
+      <th id="T_9be5d_level0_col7" class="col_heading level0 col7" >2GAMBDQ_norm_fps</th>
+      <th id="T_9be5d_level0_col8" class="col_heading level0 col8" >2GAMBDQ_norm_varsite_pos</th>
+      <th id="T_9be5d_level0_col9" class="col_heading level0 col9" >2GAMBDQ_norm_ref_allele</th>
+      <th id="T_9be5d_level0_col10" class="col_heading level0 col10" >2GAMBDQ_norm_alt_allele</th>
+      <th id="T_9be5d_level0_col11" class="col_heading level0 col11" >2GAMBDQ_norm_AF</th>
+      <th id="T_9be5d_level0_col12" class="col_heading level0 col12" >98JKPD8_lumA_varsite_pos</th>
+      <th id="T_9be5d_level0_col13" class="col_heading level0 col13" >98JKPD8_lumA_ref_allele</th>
+      <th id="T_9be5d_level0_col14" class="col_heading level0 col14" >98JKPD8_lumA_alt_allele</th>
+      <th id="T_9be5d_level0_col15" class="col_heading level0 col15" >98JKPD8_lumA_AF</th>
+      <th id="T_9be5d_level0_col16" class="col_heading level0 col16" >ANAB5F7_basal_varsite_pos</th>
+      <th id="T_9be5d_level0_col17" class="col_heading level0 col17" >ANAB5F7_basal_ref_allele</th>
+      <th id="T_9be5d_level0_col18" class="col_heading level0 col18" >ANAB5F7_basal_alt_allele</th>
+      <th id="T_9be5d_level0_col19" class="col_heading level0 col19" >ANAB5F7_basal_AF</th>
+      <th id="T_9be5d_level0_col20" class="col_heading level0 col20" >PU24GB8_lumB_varsite_pos</th>
+      <th id="T_9be5d_level0_col21" class="col_heading level0 col21" >PU24GB8_lumB_ref_allele</th>
+      <th id="T_9be5d_level0_col22" class="col_heading level0 col22" >PU24GB8_lumB_alt_allele</th>
+      <th id="T_9be5d_level0_col23" class="col_heading level0 col23" >PU24GB8_lumB_AF</th>
+      <th id="T_9be5d_level0_col24" class="col_heading level0 col24" >S6R691V_her2_varsite_pos</th>
+      <th id="T_9be5d_level0_col25" class="col_heading level0 col25" >S6R691V_her2_ref_allele</th>
+      <th id="T_9be5d_level0_col26" class="col_heading level0 col26" >S6R691V_her2_alt_allele</th>
+      <th id="T_9be5d_level0_col27" class="col_heading level0 col27" >S6R691V_her2_AF</th>
+      <th id="T_9be5d_level0_col28" class="col_heading level0 col28" >region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_9be5d_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_9be5d_row0_col0" class="data row0 col0" >chr1</td>
+      <td id="T_9be5d_row0_col1" class="data row0 col1" >10628</td>
+      <td id="T_9be5d_row0_col2" class="data row0 col2" >10638</td>
+      <td id="T_9be5d_row0_col3" class="data row0 col3" >0.000000</td>
+      <td id="T_9be5d_row0_col4" class="data row0 col4" >0.000000</td>
+      <td id="T_9be5d_row0_col5" class="data row0 col5" >0.000000</td>
+      <td id="T_9be5d_row0_col6" class="data row0 col6" >0.000000</td>
+      <td id="T_9be5d_row0_col7" class="data row0 col7" >0.000000</td>
+      <td id="T_9be5d_row0_col8" class="data row0 col8" >10629.000000</td>
+      <td id="T_9be5d_row0_col9" class="data row0 col9" >GGCGCGC</td>
+      <td id="T_9be5d_row0_col10" class="data row0 col10" >GGCGC</td>
+      <td id="T_9be5d_row0_col11" class="data row0 col11" >1.000000</td>
+      <td id="T_9be5d_row0_col12" class="data row0 col12" >10629.000000</td>
+      <td id="T_9be5d_row0_col13" class="data row0 col13" >GGCGCGC</td>
+      <td id="T_9be5d_row0_col14" class="data row0 col14" >GGCGC</td>
+      <td id="T_9be5d_row0_col15" class="data row0 col15" >0.958333</td>
+      <td id="T_9be5d_row0_col16" class="data row0 col16" >10629.000000</td>
+      <td id="T_9be5d_row0_col17" class="data row0 col17" >GGCGCGC</td>
+      <td id="T_9be5d_row0_col18" class="data row0 col18" >GGCGC</td>
+      <td id="T_9be5d_row0_col19" class="data row0 col19" >1.000000</td>
+      <td id="T_9be5d_row0_col20" class="data row0 col20" >10629.000000</td>
+      <td id="T_9be5d_row0_col21" class="data row0 col21" >GGCGCGC</td>
+      <td id="T_9be5d_row0_col22" class="data row0 col22" >GGCGC</td>
+      <td id="T_9be5d_row0_col23" class="data row0 col23" >1.000000</td>
+      <td id="T_9be5d_row0_col24" class="data row0 col24" >10629.000000</td>
+      <td id="T_9be5d_row0_col25" class="data row0 col25" >GGCGCGC</td>
+      <td id="T_9be5d_row0_col26" class="data row0 col26" >GGCGC</td>
+      <td id="T_9be5d_row0_col27" class="data row0 col27" >1.000000</td>
+      <td id="T_9be5d_row0_col28" class="data row0 col28" >chr1:10628-10638</td>
+    </tr>
+    <tr>
+      <th id="T_9be5d_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_9be5d_row1_col0" class="data row1 col0" >chr1</td>
+      <td id="T_9be5d_row1_col1" class="data row1 col1" >181224</td>
+      <td id="T_9be5d_row1_col2" class="data row1 col2" >181234</td>
+      <td id="T_9be5d_row1_col3" class="data row1 col3" >0.000000</td>
+      <td id="T_9be5d_row1_col4" class="data row1 col4" >0.000000</td>
+      <td id="T_9be5d_row1_col5" class="data row1 col5" >0.000000</td>
+      <td id="T_9be5d_row1_col6" class="data row1 col6" >0.000000</td>
+      <td id="T_9be5d_row1_col7" class="data row1 col7" >0.000000</td>
+      <td id="T_9be5d_row1_col8" class="data row1 col8" >nan</td>
+      <td id="T_9be5d_row1_col9" class="data row1 col9" >nan</td>
+      <td id="T_9be5d_row1_col10" class="data row1 col10" >nan</td>
+      <td id="T_9be5d_row1_col11" class="data row1 col11" >0.000000</td>
+      <td id="T_9be5d_row1_col12" class="data row1 col12" >nan</td>
+      <td id="T_9be5d_row1_col13" class="data row1 col13" >nan</td>
+      <td id="T_9be5d_row1_col14" class="data row1 col14" >nan</td>
+      <td id="T_9be5d_row1_col15" class="data row1 col15" >0.000000</td>
+      <td id="T_9be5d_row1_col16" class="data row1 col16" >nan</td>
+      <td id="T_9be5d_row1_col17" class="data row1 col17" >nan</td>
+      <td id="T_9be5d_row1_col18" class="data row1 col18" >nan</td>
+      <td id="T_9be5d_row1_col19" class="data row1 col19" >0.000000</td>
+      <td id="T_9be5d_row1_col20" class="data row1 col20" >nan</td>
+      <td id="T_9be5d_row1_col21" class="data row1 col21" >nan</td>
+      <td id="T_9be5d_row1_col22" class="data row1 col22" >nan</td>
+      <td id="T_9be5d_row1_col23" class="data row1 col23" >0.000000</td>
+      <td id="T_9be5d_row1_col24" class="data row1 col24" >nan</td>
+      <td id="T_9be5d_row1_col25" class="data row1 col25" >nan</td>
+      <td id="T_9be5d_row1_col26" class="data row1 col26" >nan</td>
+      <td id="T_9be5d_row1_col27" class="data row1 col27" >0.000000</td>
+      <td id="T_9be5d_row1_col28" class="data row1 col28" >chr1:181224-181234</td>
+    </tr>
+    <tr>
+      <th id="T_9be5d_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_9be5d_row2_col0" class="data row2 col0" >chr1</td>
+      <td id="T_9be5d_row2_col1" class="data row2 col1" >779214</td>
+      <td id="T_9be5d_row2_col2" class="data row2 col2" >779224</td>
+      <td id="T_9be5d_row2_col3" class="data row2 col3" >0.000000</td>
+      <td id="T_9be5d_row2_col4" class="data row2 col4" >0.000000</td>
+      <td id="T_9be5d_row2_col5" class="data row2 col5" >0.000000</td>
+      <td id="T_9be5d_row2_col6" class="data row2 col6" >0.000000</td>
+      <td id="T_9be5d_row2_col7" class="data row2 col7" >0.000000</td>
+      <td id="T_9be5d_row2_col8" class="data row2 col8" >nan</td>
+      <td id="T_9be5d_row2_col9" class="data row2 col9" >nan</td>
+      <td id="T_9be5d_row2_col10" class="data row2 col10" >nan</td>
+      <td id="T_9be5d_row2_col11" class="data row2 col11" >0.000000</td>
+      <td id="T_9be5d_row2_col12" class="data row2 col12" >779216.000000</td>
+      <td id="T_9be5d_row2_col13" class="data row2 col13" >T</td>
+      <td id="T_9be5d_row2_col14" class="data row2 col14" >C</td>
+      <td id="T_9be5d_row2_col15" class="data row2 col15" >0.125000</td>
+      <td id="T_9be5d_row2_col16" class="data row2 col16" >779216.000000</td>
+      <td id="T_9be5d_row2_col17" class="data row2 col17" >T</td>
+      <td id="T_9be5d_row2_col18" class="data row2 col18" >C</td>
+      <td id="T_9be5d_row2_col19" class="data row2 col19" >0.029412</td>
+      <td id="T_9be5d_row2_col20" class="data row2 col20" >779216.000000</td>
+      <td id="T_9be5d_row2_col21" class="data row2 col21" >T</td>
+      <td id="T_9be5d_row2_col22" class="data row2 col22" >C</td>
+      <td id="T_9be5d_row2_col23" class="data row2 col23" >0.026316</td>
+      <td id="T_9be5d_row2_col24" class="data row2 col24" >779216.000000</td>
+      <td id="T_9be5d_row2_col25" class="data row2 col25" >T</td>
+      <td id="T_9be5d_row2_col26" class="data row2 col26" >C</td>
+      <td id="T_9be5d_row2_col27" class="data row2 col27" >0.058824</td>
+      <td id="T_9be5d_row2_col28" class="data row2 col28" >chr1:779214-779224</td>
+    </tr>
+    <tr>
+      <th id="T_9be5d_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_9be5d_row3_col0" class="data row3 col0" >chr1</td>
+      <td id="T_9be5d_row3_col1" class="data row3 col1" >998754</td>
+      <td id="T_9be5d_row3_col2" class="data row3 col2" >998764</td>
+      <td id="T_9be5d_row3_col3" class="data row3 col3" >0.137600</td>
+      <td id="T_9be5d_row3_col4" class="data row3 col4" >0.140350</td>
+      <td id="T_9be5d_row3_col5" class="data row3 col5" >0.128420</td>
+      <td id="T_9be5d_row3_col6" class="data row3 col6" >0.145000</td>
+      <td id="T_9be5d_row3_col7" class="data row3 col7" >0.105100</td>
+      <td id="T_9be5d_row3_col8" class="data row3 col8" >nan</td>
+      <td id="T_9be5d_row3_col9" class="data row3 col9" >nan</td>
+      <td id="T_9be5d_row3_col10" class="data row3 col10" >nan</td>
+      <td id="T_9be5d_row3_col11" class="data row3 col11" >0.000000</td>
+      <td id="T_9be5d_row3_col12" class="data row3 col12" >nan</td>
+      <td id="T_9be5d_row3_col13" class="data row3 col13" >nan</td>
+      <td id="T_9be5d_row3_col14" class="data row3 col14" >nan</td>
+      <td id="T_9be5d_row3_col15" class="data row3 col15" >0.000000</td>
+      <td id="T_9be5d_row3_col16" class="data row3 col16" >nan</td>
+      <td id="T_9be5d_row3_col17" class="data row3 col17" >nan</td>
+      <td id="T_9be5d_row3_col18" class="data row3 col18" >nan</td>
+      <td id="T_9be5d_row3_col19" class="data row3 col19" >0.000000</td>
+      <td id="T_9be5d_row3_col20" class="data row3 col20" >nan</td>
+      <td id="T_9be5d_row3_col21" class="data row3 col21" >nan</td>
+      <td id="T_9be5d_row3_col22" class="data row3 col22" >nan</td>
+      <td id="T_9be5d_row3_col23" class="data row3 col23" >0.000000</td>
+      <td id="T_9be5d_row3_col24" class="data row3 col24" >nan</td>
+      <td id="T_9be5d_row3_col25" class="data row3 col25" >nan</td>
+      <td id="T_9be5d_row3_col26" class="data row3 col26" >nan</td>
+      <td id="T_9be5d_row3_col27" class="data row3 col27" >0.000000</td>
+      <td id="T_9be5d_row3_col28" class="data row3 col28" >chr1:998754-998764</td>
+    </tr>
+    <tr>
+      <th id="T_9be5d_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_9be5d_row4_col0" class="data row4 col0" >chr1</td>
+      <td id="T_9be5d_row4_col1" class="data row4 col1" >998768</td>
+      <td id="T_9be5d_row4_col2" class="data row4 col2" >998778</td>
+      <td id="T_9be5d_row4_col3" class="data row4 col3" >0.182240</td>
+      <td id="T_9be5d_row4_col4" class="data row4 col4" >0.167080</td>
+      <td id="T_9be5d_row4_col5" class="data row4 col5" >0.169110</td>
+      <td id="T_9be5d_row4_col6" class="data row4 col6" >0.183020</td>
+      <td id="T_9be5d_row4_col7" class="data row4 col7" >0.127590</td>
+      <td id="T_9be5d_row4_col8" class="data row4 col8" >nan</td>
+      <td id="T_9be5d_row4_col9" class="data row4 col9" >nan</td>
+      <td id="T_9be5d_row4_col10" class="data row4 col10" >nan</td>
+      <td id="T_9be5d_row4_col11" class="data row4 col11" >0.000000</td>
+      <td id="T_9be5d_row4_col12" class="data row4 col12" >nan</td>
+      <td id="T_9be5d_row4_col13" class="data row4 col13" >nan</td>
+      <td id="T_9be5d_row4_col14" class="data row4 col14" >nan</td>
+      <td id="T_9be5d_row4_col15" class="data row4 col15" >0.000000</td>
+      <td id="T_9be5d_row4_col16" class="data row4 col16" >nan</td>
+      <td id="T_9be5d_row4_col17" class="data row4 col17" >nan</td>
+      <td id="T_9be5d_row4_col18" class="data row4 col18" >nan</td>
+      <td id="T_9be5d_row4_col19" class="data row4 col19" >0.000000</td>
+      <td id="T_9be5d_row4_col20" class="data row4 col20" >nan</td>
+      <td id="T_9be5d_row4_col21" class="data row4 col21" >nan</td>
+      <td id="T_9be5d_row4_col22" class="data row4 col22" >nan</td>
+      <td id="T_9be5d_row4_col23" class="data row4 col23" >0.000000</td>
+      <td id="T_9be5d_row4_col24" class="data row4 col24" >nan</td>
+      <td id="T_9be5d_row4_col25" class="data row4 col25" >nan</td>
+      <td id="T_9be5d_row4_col26" class="data row4 col26" >nan</td>
+      <td id="T_9be5d_row4_col27" class="data row4 col27" >0.000000</td>
+      <td id="T_9be5d_row4_col28" class="data row4 col28" >chr1:998768-998778</td>
+    </tr>
+  </tbody>
+</table>
 
 Filter the loaded table to include only the `_AF` and `_fps` columns, as
 well as the `region_id` column to get a matrix of TF footprint scores
@@ -390,18 +973,97 @@ afps_matrix = afps_df.filter(regex='_AF$|_fps$|_id$').copy()
 ```
 
 <style type="text/css">
-#T_aa3e9_row0_col0, #T_aa3e9_row0_col1, #T_aa3e9_row0_col2, #T_aa3e9_row0_col3, #T_aa3e9_row0_col4, #T_aa3e9_row0_col5, #T_aa3e9_row0_col6, #T_aa3e9_row0_col7, #T_aa3e9_row0_col8, #T_aa3e9_row0_col9, #T_aa3e9_row0_col10, #T_aa3e9_row1_col0, #T_aa3e9_row1_col1, #T_aa3e9_row1_col2, #T_aa3e9_row1_col3, #T_aa3e9_row1_col4, #T_aa3e9_row1_col5, #T_aa3e9_row1_col6, #T_aa3e9_row1_col7, #T_aa3e9_row1_col8, #T_aa3e9_row1_col9, #T_aa3e9_row1_col10, #T_aa3e9_row2_col0, #T_aa3e9_row2_col1, #T_aa3e9_row2_col2, #T_aa3e9_row2_col3, #T_aa3e9_row2_col4, #T_aa3e9_row2_col5, #T_aa3e9_row2_col6, #T_aa3e9_row2_col7, #T_aa3e9_row2_col8, #T_aa3e9_row2_col9, #T_aa3e9_row2_col10, #T_aa3e9_row3_col0, #T_aa3e9_row3_col1, #T_aa3e9_row3_col2, #T_aa3e9_row3_col3, #T_aa3e9_row3_col4, #T_aa3e9_row3_col5, #T_aa3e9_row3_col6, #T_aa3e9_row3_col7, #T_aa3e9_row3_col8, #T_aa3e9_row3_col9, #T_aa3e9_row3_col10, #T_aa3e9_row4_col0, #T_aa3e9_row4_col1, #T_aa3e9_row4_col2, #T_aa3e9_row4_col3, #T_aa3e9_row4_col4, #T_aa3e9_row4_col5, #T_aa3e9_row4_col6, #T_aa3e9_row4_col7, #T_aa3e9_row4_col8, #T_aa3e9_row4_col9, #T_aa3e9_row4_col10 {
-  font-size: 10pt;
-}
 </style>
-
-| 98JKPD8 lumA fps | ANAB5F7 basal fps | S6R691V her2 fps | PU24GB8 lumB fps | 2GAMBDQ norm fps | 2GAMBDQ norm AF | 98JKPD8 lumA AF | ANAB5F7 basal AF | PU24GB8 lumB AF | S6R691V her2 AF | region id          |
-|------------------|-------------------|------------------|------------------|------------------|-----------------|-----------------|------------------|-----------------|-----------------|--------------------|
-| 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | 1.000000        | 0.958333        | 1.000000         | 1.000000        | 1.000000        | chr1:10628-10638   |
-| 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | 0.000000        | 0.000000        | 0.000000         | 0.000000        | 0.000000        | chr1:181224-181234 |
-| 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         | 0.000000        | 0.125000        | 0.029412         | 0.026316        | 0.058824        | chr1:779214-779224 |
-| 0.137600         | 0.140350          | 0.128420         | 0.145000         | 0.105100         | 0.000000        | 0.000000        | 0.000000         | 0.000000        | 0.000000        | chr1:998754-998764 |
-| 0.182240         | 0.167080          | 0.169110         | 0.183020         | 0.127590         | 0.000000        | 0.000000        | 0.000000         | 0.000000        | 0.000000        | chr1:998768-998778 |
+<table id="T_f7e7f" data-quarto-disable-processing="true">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_f7e7f_level0_col0" class="col_heading level0 col0" >98JKPD8_lumA_fps</th>
+      <th id="T_f7e7f_level0_col1" class="col_heading level0 col1" >ANAB5F7_basal_fps</th>
+      <th id="T_f7e7f_level0_col2" class="col_heading level0 col2" >S6R691V_her2_fps</th>
+      <th id="T_f7e7f_level0_col3" class="col_heading level0 col3" >PU24GB8_lumB_fps</th>
+      <th id="T_f7e7f_level0_col4" class="col_heading level0 col4" >2GAMBDQ_norm_fps</th>
+      <th id="T_f7e7f_level0_col5" class="col_heading level0 col5" >2GAMBDQ_norm_AF</th>
+      <th id="T_f7e7f_level0_col6" class="col_heading level0 col6" >98JKPD8_lumA_AF</th>
+      <th id="T_f7e7f_level0_col7" class="col_heading level0 col7" >ANAB5F7_basal_AF</th>
+      <th id="T_f7e7f_level0_col8" class="col_heading level0 col8" >PU24GB8_lumB_AF</th>
+      <th id="T_f7e7f_level0_col9" class="col_heading level0 col9" >S6R691V_her2_AF</th>
+      <th id="T_f7e7f_level0_col10" class="col_heading level0 col10" >region_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_f7e7f_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_f7e7f_row0_col0" class="data row0 col0" >0.000000</td>
+      <td id="T_f7e7f_row0_col1" class="data row0 col1" >0.000000</td>
+      <td id="T_f7e7f_row0_col2" class="data row0 col2" >0.000000</td>
+      <td id="T_f7e7f_row0_col3" class="data row0 col3" >0.000000</td>
+      <td id="T_f7e7f_row0_col4" class="data row0 col4" >0.000000</td>
+      <td id="T_f7e7f_row0_col5" class="data row0 col5" >1.000000</td>
+      <td id="T_f7e7f_row0_col6" class="data row0 col6" >0.958333</td>
+      <td id="T_f7e7f_row0_col7" class="data row0 col7" >1.000000</td>
+      <td id="T_f7e7f_row0_col8" class="data row0 col8" >1.000000</td>
+      <td id="T_f7e7f_row0_col9" class="data row0 col9" >1.000000</td>
+      <td id="T_f7e7f_row0_col10" class="data row0 col10" >chr1:10628-10638</td>
+    </tr>
+    <tr>
+      <th id="T_f7e7f_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_f7e7f_row1_col0" class="data row1 col0" >0.000000</td>
+      <td id="T_f7e7f_row1_col1" class="data row1 col1" >0.000000</td>
+      <td id="T_f7e7f_row1_col2" class="data row1 col2" >0.000000</td>
+      <td id="T_f7e7f_row1_col3" class="data row1 col3" >0.000000</td>
+      <td id="T_f7e7f_row1_col4" class="data row1 col4" >0.000000</td>
+      <td id="T_f7e7f_row1_col5" class="data row1 col5" >0.000000</td>
+      <td id="T_f7e7f_row1_col6" class="data row1 col6" >0.000000</td>
+      <td id="T_f7e7f_row1_col7" class="data row1 col7" >0.000000</td>
+      <td id="T_f7e7f_row1_col8" class="data row1 col8" >0.000000</td>
+      <td id="T_f7e7f_row1_col9" class="data row1 col9" >0.000000</td>
+      <td id="T_f7e7f_row1_col10" class="data row1 col10" >chr1:181224-181234</td>
+    </tr>
+    <tr>
+      <th id="T_f7e7f_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_f7e7f_row2_col0" class="data row2 col0" >0.000000</td>
+      <td id="T_f7e7f_row2_col1" class="data row2 col1" >0.000000</td>
+      <td id="T_f7e7f_row2_col2" class="data row2 col2" >0.000000</td>
+      <td id="T_f7e7f_row2_col3" class="data row2 col3" >0.000000</td>
+      <td id="T_f7e7f_row2_col4" class="data row2 col4" >0.000000</td>
+      <td id="T_f7e7f_row2_col5" class="data row2 col5" >0.000000</td>
+      <td id="T_f7e7f_row2_col6" class="data row2 col6" >0.125000</td>
+      <td id="T_f7e7f_row2_col7" class="data row2 col7" >0.029412</td>
+      <td id="T_f7e7f_row2_col8" class="data row2 col8" >0.026316</td>
+      <td id="T_f7e7f_row2_col9" class="data row2 col9" >0.058824</td>
+      <td id="T_f7e7f_row2_col10" class="data row2 col10" >chr1:779214-779224</td>
+    </tr>
+    <tr>
+      <th id="T_f7e7f_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_f7e7f_row3_col0" class="data row3 col0" >0.137600</td>
+      <td id="T_f7e7f_row3_col1" class="data row3 col1" >0.140350</td>
+      <td id="T_f7e7f_row3_col2" class="data row3 col2" >0.128420</td>
+      <td id="T_f7e7f_row3_col3" class="data row3 col3" >0.145000</td>
+      <td id="T_f7e7f_row3_col4" class="data row3 col4" >0.105100</td>
+      <td id="T_f7e7f_row3_col5" class="data row3 col5" >0.000000</td>
+      <td id="T_f7e7f_row3_col6" class="data row3 col6" >0.000000</td>
+      <td id="T_f7e7f_row3_col7" class="data row3 col7" >0.000000</td>
+      <td id="T_f7e7f_row3_col8" class="data row3 col8" >0.000000</td>
+      <td id="T_f7e7f_row3_col9" class="data row3 col9" >0.000000</td>
+      <td id="T_f7e7f_row3_col10" class="data row3 col10" >chr1:998754-998764</td>
+    </tr>
+    <tr>
+      <th id="T_f7e7f_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_f7e7f_row4_col0" class="data row4 col0" >0.182240</td>
+      <td id="T_f7e7f_row4_col1" class="data row4 col1" >0.167080</td>
+      <td id="T_f7e7f_row4_col2" class="data row4 col2" >0.169110</td>
+      <td id="T_f7e7f_row4_col3" class="data row4 col3" >0.183020</td>
+      <td id="T_f7e7f_row4_col4" class="data row4 col4" >0.127590</td>
+      <td id="T_f7e7f_row4_col5" class="data row4 col5" >0.000000</td>
+      <td id="T_f7e7f_row4_col6" class="data row4 col6" >0.000000</td>
+      <td id="T_f7e7f_row4_col7" class="data row4 col7" >0.000000</td>
+      <td id="T_f7e7f_row4_col8" class="data row4 col8" >0.000000</td>
+      <td id="T_f7e7f_row4_col9" class="data row4 col9" >0.000000</td>
+      <td id="T_f7e7f_row4_col10" class="data row4 col10" >chr1:998768-998778</td>
+    </tr>
+  </tbody>
+</table>
 
 This matrix is in the wide format so it should be converted into a long
 format for easier wrangling.
@@ -428,21 +1090,55 @@ afps_mtx_lpv = afps_mtx_lpv.reset_index(drop=True)
 ```
 
 <style type="text/css">
-#T_8f3da th {
-  font-size: 8pt;
-}
-#T_8f3da_row0_col0, #T_8f3da_row0_col1, #T_8f3da_row0_col2, #T_8f3da_row0_col3, #T_8f3da_row1_col0, #T_8f3da_row1_col1, #T_8f3da_row1_col2, #T_8f3da_row1_col3, #T_8f3da_row2_col0, #T_8f3da_row2_col1, #T_8f3da_row2_col2, #T_8f3da_row2_col3, #T_8f3da_row3_col0, #T_8f3da_row3_col1, #T_8f3da_row3_col2, #T_8f3da_row3_col3, #T_8f3da_row4_col0, #T_8f3da_row4_col1, #T_8f3da_row4_col2, #T_8f3da_row4_col3 {
-  font-size: 8pt;
-}
 </style>
-
-|     | region id        | sample id     | AF       | FPS      |
-|-----|------------------|---------------|----------|----------|
-| 0   | chr1:10628-10638 | 2GAMBDQ_norm  | 1.000000 | 0.000000 |
-| 1   | chr1:10628-10638 | 98JKPD8_lumA  | 0.958333 | 0.000000 |
-| 2   | chr1:10628-10638 | ANAB5F7_basal | 1.000000 | 0.000000 |
-| 3   | chr1:10628-10638 | PU24GB8_lumB  | 1.000000 | 0.000000 |
-| 4   | chr1:10628-10638 | S6R691V_her2  | 1.000000 | 0.000000 |
+<table id="T_94cf7" data-quarto-disable-processing="true">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_94cf7_level0_col0" class="col_heading level0 col0" >region_id</th>
+      <th id="T_94cf7_level0_col1" class="col_heading level0 col1" >sample_id</th>
+      <th id="T_94cf7_level0_col2" class="col_heading level0 col2" >AF</th>
+      <th id="T_94cf7_level0_col3" class="col_heading level0 col3" >FPS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_94cf7_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_94cf7_row0_col0" class="data row0 col0" >chr1:10628-10638</td>
+      <td id="T_94cf7_row0_col1" class="data row0 col1" >2GAMBDQ_norm</td>
+      <td id="T_94cf7_row0_col2" class="data row0 col2" >1.000000</td>
+      <td id="T_94cf7_row0_col3" class="data row0 col3" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_94cf7_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_94cf7_row1_col0" class="data row1 col0" >chr1:10628-10638</td>
+      <td id="T_94cf7_row1_col1" class="data row1 col1" >98JKPD8_lumA</td>
+      <td id="T_94cf7_row1_col2" class="data row1 col2" >0.958333</td>
+      <td id="T_94cf7_row1_col3" class="data row1 col3" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_94cf7_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_94cf7_row2_col0" class="data row2 col0" >chr1:10628-10638</td>
+      <td id="T_94cf7_row2_col1" class="data row2 col1" >ANAB5F7_basal</td>
+      <td id="T_94cf7_row2_col2" class="data row2 col2" >1.000000</td>
+      <td id="T_94cf7_row2_col3" class="data row2 col3" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_94cf7_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_94cf7_row3_col0" class="data row3 col0" >chr1:10628-10638</td>
+      <td id="T_94cf7_row3_col1" class="data row3 col1" >PU24GB8_lumB</td>
+      <td id="T_94cf7_row3_col2" class="data row3 col2" >1.000000</td>
+      <td id="T_94cf7_row3_col3" class="data row3 col3" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_94cf7_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_94cf7_row4_col0" class="data row4 col0" >chr1:10628-10638</td>
+      <td id="T_94cf7_row4_col1" class="data row4 col1" >S6R691V_her2</td>
+      <td id="T_94cf7_row4_col2" class="data row4 col2" >1.000000</td>
+      <td id="T_94cf7_row4_col3" class="data row4 col3" >0.000000</td>
+    </tr>
+  </tbody>
+</table>
 
     Number of rows in the wide form: 2972
     Number of rows in the long form: 14860
@@ -475,22 +1171,69 @@ fps_df_scaled = fps_df_scaled.add_suffix('_scaled')
 ```
 
 <style type="text/css">
-#T_672e5 th {
-  font-size: 10pt;
-}
-#T_672e5_row0_col0, #T_672e5_row0_col1, #T_672e5_row0_col2, #T_672e5_row0_col3, #T_672e5_row0_col4, #T_672e5_row1_col0, #T_672e5_row1_col1, #T_672e5_row1_col2, #T_672e5_row1_col3, #T_672e5_row1_col4, #T_672e5_row2_col0, #T_672e5_row2_col1, #T_672e5_row2_col2, #T_672e5_row2_col3, #T_672e5_row2_col4, #T_672e5_row3_col0, #T_672e5_row3_col1, #T_672e5_row3_col2, #T_672e5_row3_col3, #T_672e5_row3_col4, #T_672e5_row4_col0, #T_672e5_row4_col1, #T_672e5_row4_col2, #T_672e5_row4_col3, #T_672e5_row4_col4 {
-  font-size: 10pt;
-}
 </style>
-
-|                    | 98JKPD8 lumA fps scaled | ANAB5F7 basal fps scaled | S6R691V her2 fps scaled | PU24GB8 lumB fps scaled | 2GAMBDQ norm fps scaled |
-|--------------------|-------------------------|--------------------------|-------------------------|-------------------------|-------------------------|
-| region_id          |                         |                          |                         |                         |                         |
-| chr1:10628-10638   | 0.000000                | 0.000000                 | 0.000000                | 0.000000                | 0.000000                |
-| chr1:181224-181234 | 0.000000                | 0.000000                 | 0.000000                | 0.000000                | 0.000000                |
-| chr1:779214-779224 | 0.000000                | 0.000000                 | 0.000000                | 0.000000                | 0.000000                |
-| chr1:998754-998764 | 0.034220                | 0.034358                 | 0.040032                | 0.041878                | 0.027917                |
-| chr1:998768-998778 | 0.045321                | 0.040901                 | 0.052716                | 0.052858                | 0.033891                |
+<table id="T_89dd8" data-quarto-disable-processing="true">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_89dd8_level0_col0" class="col_heading level0 col0" >98JKPD8_lumA_fps_scaled</th>
+      <th id="T_89dd8_level0_col1" class="col_heading level0 col1" >ANAB5F7_basal_fps_scaled</th>
+      <th id="T_89dd8_level0_col2" class="col_heading level0 col2" >S6R691V_her2_fps_scaled</th>
+      <th id="T_89dd8_level0_col3" class="col_heading level0 col3" >PU24GB8_lumB_fps_scaled</th>
+      <th id="T_89dd8_level0_col4" class="col_heading level0 col4" >2GAMBDQ_norm_fps_scaled</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >region_id</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+      <th class="blank col2" >&nbsp;</th>
+      <th class="blank col3" >&nbsp;</th>
+      <th class="blank col4" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_89dd8_level0_row0" class="row_heading level0 row0" >chr1:10628-10638</th>
+      <td id="T_89dd8_row0_col0" class="data row0 col0" >0.000000</td>
+      <td id="T_89dd8_row0_col1" class="data row0 col1" >0.000000</td>
+      <td id="T_89dd8_row0_col2" class="data row0 col2" >0.000000</td>
+      <td id="T_89dd8_row0_col3" class="data row0 col3" >0.000000</td>
+      <td id="T_89dd8_row0_col4" class="data row0 col4" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_89dd8_level0_row1" class="row_heading level0 row1" >chr1:181224-181234</th>
+      <td id="T_89dd8_row1_col0" class="data row1 col0" >0.000000</td>
+      <td id="T_89dd8_row1_col1" class="data row1 col1" >0.000000</td>
+      <td id="T_89dd8_row1_col2" class="data row1 col2" >0.000000</td>
+      <td id="T_89dd8_row1_col3" class="data row1 col3" >0.000000</td>
+      <td id="T_89dd8_row1_col4" class="data row1 col4" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_89dd8_level0_row2" class="row_heading level0 row2" >chr1:779214-779224</th>
+      <td id="T_89dd8_row2_col0" class="data row2 col0" >0.000000</td>
+      <td id="T_89dd8_row2_col1" class="data row2 col1" >0.000000</td>
+      <td id="T_89dd8_row2_col2" class="data row2 col2" >0.000000</td>
+      <td id="T_89dd8_row2_col3" class="data row2 col3" >0.000000</td>
+      <td id="T_89dd8_row2_col4" class="data row2 col4" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_89dd8_level0_row3" class="row_heading level0 row3" >chr1:998754-998764</th>
+      <td id="T_89dd8_row3_col0" class="data row3 col0" >0.034220</td>
+      <td id="T_89dd8_row3_col1" class="data row3 col1" >0.034358</td>
+      <td id="T_89dd8_row3_col2" class="data row3 col2" >0.040032</td>
+      <td id="T_89dd8_row3_col3" class="data row3 col3" >0.041878</td>
+      <td id="T_89dd8_row3_col4" class="data row3 col4" >0.027917</td>
+    </tr>
+    <tr>
+      <th id="T_89dd8_level0_row4" class="row_heading level0 row4" >chr1:998768-998778</th>
+      <td id="T_89dd8_row4_col0" class="data row4 col0" >0.045321</td>
+      <td id="T_89dd8_row4_col1" class="data row4 col1" >0.040901</td>
+      <td id="T_89dd8_row4_col2" class="data row4 col2" >0.052716</td>
+      <td id="T_89dd8_row4_col3" class="data row4 col3" >0.052858</td>
+      <td id="T_89dd8_row4_col4" class="data row4 col4" >0.033891</td>
+    </tr>
+  </tbody>
+</table>
 
 Now, convert the scaled dataframe into a long format.
 
@@ -523,10 +1266,10 @@ fps_df_scaled_lpv = fps_df_scaled_lpv.reset_index(drop=True)
 ```
 
 <style type="text/css">
-#T_103b2 th {
+#T_125fc th {
   font-size: 10pt;
 }
-#T_103b2_row0_col0, #T_103b2_row0_col1, #T_103b2_row0_col2, #T_103b2_row1_col0, #T_103b2_row1_col1, #T_103b2_row1_col2, #T_103b2_row2_col0, #T_103b2_row2_col1, #T_103b2_row2_col2, #T_103b2_row3_col0, #T_103b2_row3_col1, #T_103b2_row3_col2, #T_103b2_row4_col0, #T_103b2_row4_col1, #T_103b2_row4_col2 {
+#T_125fc_row0_col0, #T_125fc_row0_col1, #T_125fc_row0_col2, #T_125fc_row1_col0, #T_125fc_row1_col1, #T_125fc_row1_col2, #T_125fc_row2_col0, #T_125fc_row2_col1, #T_125fc_row2_col2, #T_125fc_row3_col0, #T_125fc_row3_col1, #T_125fc_row3_col2, #T_125fc_row4_col0, #T_125fc_row4_col1, #T_125fc_row4_col2 {
   font-size: 10pt;
 }
 </style>
@@ -545,4 +1288,4 @@ fps_df_scaled_lpv = fps_df_scaled_lpv.reset_index(drop=True)
 The distribution of the unscaled and scaled FPS datasets can be plotted
 using Seaborn’s `displot` function.
 
-![fig](data-integration-nb_files/figure-commonmark/cell-29-output-1.png)
+![](data-integration-nb_files/figure-commonmark/cell-30-output-1.png)
