@@ -1,1 +1,1 @@
-../notebooks/data-integration-nb.gfm.md
+../notebooks/data-integration-nb.md

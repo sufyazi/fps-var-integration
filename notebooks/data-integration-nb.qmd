@@ -17,7 +17,6 @@ format:
         number-sections: true
         df-print: paged
 jupyter: python3
-keep-md: true
 ---
 
 *Note: This is a Github README doc that is dynamically generated from the `qmd` notebook.*
@@ -57,7 +56,7 @@ filepath = '../demo-data/E2F2_E2F2_HUMAN.H11MO.0.B_BRCA-subtype-vcf-filtered-mat
 df_fpscore = pd.read_csv(filepath, sep='\t')
 ```
 
-```{python}
+<!-- ```{python}
 #| eval: true
 #| echo: false
 
@@ -66,7 +65,7 @@ pd.set_option('display.max_columns', 6)
 
 # Truncate middle columns
 pd.set_option('display.expand_frame_repr', False)
-```
+``` -->
 
 **Aside**: specify a formatter function to wrap long text in the data tables.
 
