@@ -4,7 +4,6 @@ author: Suffian Azizan
 format: 
     gfm:
         markdown-headings: atx
-        strip-comments: true
         df-print: default
     typst:
         wrap: auto
@@ -56,17 +55,6 @@ filepath = '../demo-data/E2F2_E2F2_HUMAN.H11MO.0.B_BRCA-subtype-vcf-filtered-mat
 df_fpscore = pd.read_csv(filepath, sep='\t')
 ```
 
-<!-- ```{python}
-#| eval: true
-#| echo: false
-
-# Limit to 8 columns
-pd.set_option('display.max_columns', 6)
-
-# Truncate middle columns
-pd.set_option('display.expand_frame_repr', False)
-``` -->
-
 **Aside**: specify a formatter function to wrap long text in the data tables.
 
 ```{python}
@@ -84,28 +72,13 @@ def func_wrap(x):
 ```
 
 ```{python}
-#| echo: false
-#| output: false
-from IPython import get_ipython
-# special ipython function to get the html formatter
-html_formatter = get_ipython().display_formatter.formatters['text/html']
-html_formatter.for_type(
-    pd.DataFrame,
-    lambda df: df.style.set_table_attributes('data-quarto-disable-processing="true"').to_html(max_rows = pd.get_option("display.max_rows"), show_dimensions = True)
-)
-```
-
-
-```{python}
 #| eval: true
 #| echo: false
 
-df_fpscore.head(n=4).style\
-    .set_properties(**{'font-size': '10pt',})\
-    .hide()\
-    .format_index(func_underscore_replace, axis=1)\
-    .set_table_styles([{'selector': 'th', 'props': [('font-size', '8pt')]}])
+df_fpscore.head(n=4)
+
 ```
+
 
 Rename the `_score` column to `_fps` to avoid confusion with the mutation score column in the mutation data table later, and drop the `TFBS_strand` and `TFBS_score` columns as they are not needed for now. 
 
@@ -125,11 +98,7 @@ df_fpscore = df_fpscore.rename(columns=lambda x: x.replace('score', 'fps') if x.
 #| eval: true
 #| echo: false
 
-df_fpscore.head(n=10).style\
-    .set_properties(**{'font-size': '10pt',})\
-    .hide()\
-    .format_index(func_underscore_replace, axis=1)\
-    .set_table_styles([{'selector': 'th', 'props': [('font-size', '8pt')]}])
+df_fpscore.head(n=10).style.set_properties(**{'font-size': '10pt',})
 ```
 
 ## Loading up the mutation data table
@@ -151,8 +120,7 @@ df_vcf.head(n=5).style\
     .set_properties(**{'font-size': '10pt',})\
     .hide()\
     .format_index(func_wrap, axis=1)\
-    .format(func_wrap)\
-    .set_table_styles([{'selector': 'th', 'props': [('font-size', '8pt')]}])
+    .format(func_wrap)
 ```
 
 

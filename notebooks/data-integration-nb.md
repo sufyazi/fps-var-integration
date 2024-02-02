@@ -79,21 +79,27 @@ def func_wrap(x):
         return x
 ```
 
-<style type="text/css">
-#T_ac6e0 th {
-  font-size: 8pt;
-}
-#T_ac6e0_row0_col0, #T_ac6e0_row0_col1, #T_ac6e0_row0_col2, #T_ac6e0_row0_col3, #T_ac6e0_row0_col4, #T_ac6e0_row0_col5, #T_ac6e0_row0_col6, #T_ac6e0_row0_col7, #T_ac6e0_row0_col8, #T_ac6e0_row0_col9, #T_ac6e0_row1_col0, #T_ac6e0_row1_col1, #T_ac6e0_row1_col2, #T_ac6e0_row1_col3, #T_ac6e0_row1_col4, #T_ac6e0_row1_col5, #T_ac6e0_row1_col6, #T_ac6e0_row1_col7, #T_ac6e0_row1_col8, #T_ac6e0_row1_col9, #T_ac6e0_row2_col0, #T_ac6e0_row2_col1, #T_ac6e0_row2_col2, #T_ac6e0_row2_col3, #T_ac6e0_row2_col4, #T_ac6e0_row2_col5, #T_ac6e0_row2_col6, #T_ac6e0_row2_col7, #T_ac6e0_row2_col8, #T_ac6e0_row2_col9, #T_ac6e0_row3_col0, #T_ac6e0_row3_col1, #T_ac6e0_row3_col2, #T_ac6e0_row3_col3, #T_ac6e0_row3_col4, #T_ac6e0_row3_col5, #T_ac6e0_row3_col6, #T_ac6e0_row3_col7, #T_ac6e0_row3_col8, #T_ac6e0_row3_col9 {
-  font-size: 10pt;
-}
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+&#10;    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+&#10;    .dataframe thead th {
+        text-align: right;
+    }
 </style>
 
-| TFBS chr | TFBS start | TFBS end | TFBS strand | TFBS score | 98JKPD8 LumA score | ANAB5F7 Basal score | S6R691V Her2 score | PU24GB8 LumB score | 2GAMBDQ Normal-like score |
-|----------|------------|----------|-------------|------------|--------------------|---------------------|--------------------|--------------------|---------------------------|
-| chr1     | 10628      | 10638    | \+          | 7.401890   | 0.000000           | 0.000000            | 0.000000           | 0.000000           | 0.000000                  |
-| chr1     | 181224     | 181234   | \+          | 7.998660   | 0.000000           | 0.000000            | 0.000000           | 0.000000           | 0.000000                  |
-| chr1     | 779214     | 779224   | \-          | 7.796470   | 0.000000           | 0.000000            | 0.000000           | 0.000000           | 0.000000                  |
-| chr1     | 998754     | 998764   | \+          | 8.560290   | 0.137600           | 0.140350            | 0.128420           | 0.145000           | 0.105100                  |
+|     | TFBS_chr | TFBS_start | TFBS_end | TFBS_strand | TFBS_score | 98JKPD8_LumA_score | ANAB5F7_Basal_score | S6R691V_Her2_score | PU24GB8_LumB_score | 2GAMBDQ_Normal-like_score |
+|-----|----------|------------|----------|-------------|------------|--------------------|---------------------|--------------------|--------------------|---------------------------|
+| 0   | chr1     | 10628      | 10638    | \+          | 7.40189    | 0.0000             | 0.00000             | 0.00000            | 0.000              | 0.0000                    |
+| 1   | chr1     | 181224     | 181234   | \+          | 7.99866    | 0.0000             | 0.00000             | 0.00000            | 0.000              | 0.0000                    |
+| 2   | chr1     | 779214     | 779224   | \-          | 7.79647    | 0.0000             | 0.00000             | 0.00000            | 0.000              | 0.0000                    |
+| 3   | chr1     | 998754     | 998764   | \+          | 8.56029    | 0.1376             | 0.14035             | 0.12842            | 0.145              | 0.1051                    |
+
+</div>
 
 Rename the `_score` column to `_fps` to avoid confusion with the
 mutation score column in the mutation data table later, and drop the
@@ -109,26 +115,23 @@ df_fpscore = df_fpscore.rename(columns=lambda x: x.replace('score', 'fps') if x.
 ```
 
 <style type="text/css">
-#T_d6ff6 th {
-  font-size: 8pt;
-}
-#T_d6ff6_row0_col0, #T_d6ff6_row0_col1, #T_d6ff6_row0_col2, #T_d6ff6_row0_col3, #T_d6ff6_row0_col4, #T_d6ff6_row0_col5, #T_d6ff6_row0_col6, #T_d6ff6_row0_col7, #T_d6ff6_row1_col0, #T_d6ff6_row1_col1, #T_d6ff6_row1_col2, #T_d6ff6_row1_col3, #T_d6ff6_row1_col4, #T_d6ff6_row1_col5, #T_d6ff6_row1_col6, #T_d6ff6_row1_col7, #T_d6ff6_row2_col0, #T_d6ff6_row2_col1, #T_d6ff6_row2_col2, #T_d6ff6_row2_col3, #T_d6ff6_row2_col4, #T_d6ff6_row2_col5, #T_d6ff6_row2_col6, #T_d6ff6_row2_col7, #T_d6ff6_row3_col0, #T_d6ff6_row3_col1, #T_d6ff6_row3_col2, #T_d6ff6_row3_col3, #T_d6ff6_row3_col4, #T_d6ff6_row3_col5, #T_d6ff6_row3_col6, #T_d6ff6_row3_col7, #T_d6ff6_row4_col0, #T_d6ff6_row4_col1, #T_d6ff6_row4_col2, #T_d6ff6_row4_col3, #T_d6ff6_row4_col4, #T_d6ff6_row4_col5, #T_d6ff6_row4_col6, #T_d6ff6_row4_col7, #T_d6ff6_row5_col0, #T_d6ff6_row5_col1, #T_d6ff6_row5_col2, #T_d6ff6_row5_col3, #T_d6ff6_row5_col4, #T_d6ff6_row5_col5, #T_d6ff6_row5_col6, #T_d6ff6_row5_col7, #T_d6ff6_row6_col0, #T_d6ff6_row6_col1, #T_d6ff6_row6_col2, #T_d6ff6_row6_col3, #T_d6ff6_row6_col4, #T_d6ff6_row6_col5, #T_d6ff6_row6_col6, #T_d6ff6_row6_col7, #T_d6ff6_row7_col0, #T_d6ff6_row7_col1, #T_d6ff6_row7_col2, #T_d6ff6_row7_col3, #T_d6ff6_row7_col4, #T_d6ff6_row7_col5, #T_d6ff6_row7_col6, #T_d6ff6_row7_col7, #T_d6ff6_row8_col0, #T_d6ff6_row8_col1, #T_d6ff6_row8_col2, #T_d6ff6_row8_col3, #T_d6ff6_row8_col4, #T_d6ff6_row8_col5, #T_d6ff6_row8_col6, #T_d6ff6_row8_col7, #T_d6ff6_row9_col0, #T_d6ff6_row9_col1, #T_d6ff6_row9_col2, #T_d6ff6_row9_col3, #T_d6ff6_row9_col4, #T_d6ff6_row9_col5, #T_d6ff6_row9_col6, #T_d6ff6_row9_col7 {
+#T_04785_row0_col0, #T_04785_row0_col1, #T_04785_row0_col2, #T_04785_row0_col3, #T_04785_row0_col4, #T_04785_row0_col5, #T_04785_row0_col6, #T_04785_row0_col7, #T_04785_row1_col0, #T_04785_row1_col1, #T_04785_row1_col2, #T_04785_row1_col3, #T_04785_row1_col4, #T_04785_row1_col5, #T_04785_row1_col6, #T_04785_row1_col7, #T_04785_row2_col0, #T_04785_row2_col1, #T_04785_row2_col2, #T_04785_row2_col3, #T_04785_row2_col4, #T_04785_row2_col5, #T_04785_row2_col6, #T_04785_row2_col7, #T_04785_row3_col0, #T_04785_row3_col1, #T_04785_row3_col2, #T_04785_row3_col3, #T_04785_row3_col4, #T_04785_row3_col5, #T_04785_row3_col6, #T_04785_row3_col7, #T_04785_row4_col0, #T_04785_row4_col1, #T_04785_row4_col2, #T_04785_row4_col3, #T_04785_row4_col4, #T_04785_row4_col5, #T_04785_row4_col6, #T_04785_row4_col7, #T_04785_row5_col0, #T_04785_row5_col1, #T_04785_row5_col2, #T_04785_row5_col3, #T_04785_row5_col4, #T_04785_row5_col5, #T_04785_row5_col6, #T_04785_row5_col7, #T_04785_row6_col0, #T_04785_row6_col1, #T_04785_row6_col2, #T_04785_row6_col3, #T_04785_row6_col4, #T_04785_row6_col5, #T_04785_row6_col6, #T_04785_row6_col7, #T_04785_row7_col0, #T_04785_row7_col1, #T_04785_row7_col2, #T_04785_row7_col3, #T_04785_row7_col4, #T_04785_row7_col5, #T_04785_row7_col6, #T_04785_row7_col7, #T_04785_row8_col0, #T_04785_row8_col1, #T_04785_row8_col2, #T_04785_row8_col3, #T_04785_row8_col4, #T_04785_row8_col5, #T_04785_row8_col6, #T_04785_row8_col7, #T_04785_row9_col0, #T_04785_row9_col1, #T_04785_row9_col2, #T_04785_row9_col3, #T_04785_row9_col4, #T_04785_row9_col5, #T_04785_row9_col6, #T_04785_row9_col7 {
   font-size: 10pt;
 }
 </style>
 
-| Chromosome | Start   | End     | 98JKPD8 LumA fps | ANAB5F7 Basal fps | S6R691V Her2 fps | PU24GB8 LumB fps | 2GAMBDQ Norm fps |
-|------------|---------|---------|------------------|-------------------|------------------|------------------|------------------|
-| chr1       | 10628   | 10638   | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
-| chr1       | 181224  | 181234  | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
-| chr1       | 779214  | 779224  | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
-| chr1       | 998754  | 998764  | 0.137600         | 0.140350          | 0.128420         | 0.145000         | 0.105100         |
-| chr1       | 998768  | 998778  | 0.182240         | 0.167080          | 0.169110         | 0.183020         | 0.127590         |
-| chr1       | 1019693 | 1019703 | 0.622590         | 0.379450          | 0.489290         | 0.644200         | 0.492220         |
-| chr1       | 1041096 | 1041106 | 0.096050         | 0.097560          | 0.090640         | 0.127590         | 0.110160         |
-| chr1       | 1164827 | 1164837 | 0.110270         | 0.149950          | 0.073960         | 0.067850         | 0.080790         |
-| chr1       | 1206766 | 1206776 | 0.067360         | 0.063970          | 0.041980         | 0.069200         | 0.072820         |
-| chr1       | 1309989 | 1309999 | 0.123050         | 0.144050          | 0.141260         | 0.124540         | 0.096460         |
+|     | Chromosome | Start   | End     | 98JKPD8_LumA_fps | ANAB5F7_Basal_fps | S6R691V_Her2_fps | PU24GB8_LumB_fps | 2GAMBDQ_Norm_fps |
+|-----|------------|---------|---------|------------------|-------------------|------------------|------------------|------------------|
+| 0   | chr1       | 10628   | 10638   | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
+| 1   | chr1       | 181224  | 181234  | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
+| 2   | chr1       | 779214  | 779224  | 0.000000         | 0.000000          | 0.000000         | 0.000000         | 0.000000         |
+| 3   | chr1       | 998754  | 998764  | 0.137600         | 0.140350          | 0.128420         | 0.145000         | 0.105100         |
+| 4   | chr1       | 998768  | 998778  | 0.182240         | 0.167080          | 0.169110         | 0.183020         | 0.127590         |
+| 5   | chr1       | 1019693 | 1019703 | 0.622590         | 0.379450          | 0.489290         | 0.644200         | 0.492220         |
+| 6   | chr1       | 1041096 | 1041106 | 0.096050         | 0.097560          | 0.090640         | 0.127590         | 0.110160         |
+| 7   | chr1       | 1164827 | 1164837 | 0.110270         | 0.149950          | 0.073960         | 0.067850         | 0.080790         |
+| 8   | chr1       | 1206766 | 1206776 | 0.067360         | 0.063970          | 0.041980         | 0.069200         | 0.072820         |
+| 9   | chr1       | 1309989 | 1309999 | 0.123050         | 0.144050          | 0.141260         | 0.124540         | 0.096460         |
 
 ## Loading up the mutation data table
 
@@ -143,10 +146,7 @@ df_vcf = pd.read_csv(vcfpath, sep="\t")
 ```
 
 <style type="text/css">
-#T_06ecf th {
-  font-size: 8pt;
-}
-#T_06ecf_row0_col0, #T_06ecf_row0_col1, #T_06ecf_row0_col2, #T_06ecf_row0_col3, #T_06ecf_row0_col4, #T_06ecf_row1_col0, #T_06ecf_row1_col1, #T_06ecf_row1_col2, #T_06ecf_row1_col3, #T_06ecf_row1_col4, #T_06ecf_row2_col0, #T_06ecf_row2_col1, #T_06ecf_row2_col2, #T_06ecf_row2_col3, #T_06ecf_row2_col4, #T_06ecf_row3_col0, #T_06ecf_row3_col1, #T_06ecf_row3_col2, #T_06ecf_row3_col3, #T_06ecf_row3_col4, #T_06ecf_row4_col0, #T_06ecf_row4_col1, #T_06ecf_row4_col2, #T_06ecf_row4_col3, #T_06ecf_row4_col4 {
+#T_8d2ff_row0_col0, #T_8d2ff_row0_col1, #T_8d2ff_row0_col2, #T_8d2ff_row0_col3, #T_8d2ff_row0_col4, #T_8d2ff_row1_col0, #T_8d2ff_row1_col1, #T_8d2ff_row1_col2, #T_8d2ff_row1_col3, #T_8d2ff_row1_col4, #T_8d2ff_row2_col0, #T_8d2ff_row2_col1, #T_8d2ff_row2_col2, #T_8d2ff_row2_col3, #T_8d2ff_row2_col4, #T_8d2ff_row3_col0, #T_8d2ff_row3_col1, #T_8d2ff_row3_col2, #T_8d2ff_row3_col3, #T_8d2ff_row3_col4, #T_8d2ff_row4_col0, #T_8d2ff_row4_col1, #T_8d2ff_row4_col2, #T_8d2ff_row4_col3, #T_8d2ff_row4_col4 {
   font-size: 10pt;
 }
 </style>
@@ -211,10 +211,10 @@ gr_fpscore = pr.PyRanges(df_fpscore)
 ```
 
 <style type="text/css">
-#T_16b5b th {
+#T_13988 th {
   font-size: 8pt;
 }
-#T_16b5b_row0_col0, #T_16b5b_row0_col1, #T_16b5b_row0_col2, #T_16b5b_row0_col3, #T_16b5b_row0_col4, #T_16b5b_row0_col5, #T_16b5b_row0_col6, #T_16b5b_row0_col7, #T_16b5b_row1_col0, #T_16b5b_row1_col1, #T_16b5b_row1_col2, #T_16b5b_row1_col3, #T_16b5b_row1_col4, #T_16b5b_row1_col5, #T_16b5b_row1_col6, #T_16b5b_row1_col7, #T_16b5b_row2_col0, #T_16b5b_row2_col1, #T_16b5b_row2_col2, #T_16b5b_row2_col3, #T_16b5b_row2_col4, #T_16b5b_row2_col5, #T_16b5b_row2_col6, #T_16b5b_row2_col7, #T_16b5b_row3_col0, #T_16b5b_row3_col1, #T_16b5b_row3_col2, #T_16b5b_row3_col3, #T_16b5b_row3_col4, #T_16b5b_row3_col5, #T_16b5b_row3_col6, #T_16b5b_row3_col7, #T_16b5b_row4_col0, #T_16b5b_row4_col1, #T_16b5b_row4_col2, #T_16b5b_row4_col3, #T_16b5b_row4_col4, #T_16b5b_row4_col5, #T_16b5b_row4_col6, #T_16b5b_row4_col7 {
+#T_13988_row0_col0, #T_13988_row0_col1, #T_13988_row0_col2, #T_13988_row0_col3, #T_13988_row0_col4, #T_13988_row0_col5, #T_13988_row0_col6, #T_13988_row0_col7, #T_13988_row1_col0, #T_13988_row1_col1, #T_13988_row1_col2, #T_13988_row1_col3, #T_13988_row1_col4, #T_13988_row1_col5, #T_13988_row1_col6, #T_13988_row1_col7, #T_13988_row2_col0, #T_13988_row2_col1, #T_13988_row2_col2, #T_13988_row2_col3, #T_13988_row2_col4, #T_13988_row2_col5, #T_13988_row2_col6, #T_13988_row2_col7, #T_13988_row3_col0, #T_13988_row3_col1, #T_13988_row3_col2, #T_13988_row3_col3, #T_13988_row3_col4, #T_13988_row3_col5, #T_13988_row3_col6, #T_13988_row3_col7, #T_13988_row4_col0, #T_13988_row4_col1, #T_13988_row4_col2, #T_13988_row4_col3, #T_13988_row4_col4, #T_13988_row4_col5, #T_13988_row4_col6, #T_13988_row4_col7 {
   font-size: 10pt;
 }
 </style>
@@ -326,10 +326,10 @@ final_df = final_df.rename(columns=lambda x: x.split('_')[0] + '_' + x.split('_'
 A slice of the final dataframe is shown below.
 
 <style type="text/css">
-#T_f3f8f th {
+#T_c19bc th {
   font-size: 8pt;
 }
-#T_f3f8f_row0_col0, #T_f3f8f_row0_col1, #T_f3f8f_row0_col2, #T_f3f8f_row0_col3, #T_f3f8f_row0_col4, #T_f3f8f_row0_col5, #T_f3f8f_row0_col6, #T_f3f8f_row0_col7, #T_f3f8f_row0_col8, #T_f3f8f_row0_col9, #T_f3f8f_row0_col10, #T_f3f8f_row0_col11, #T_f3f8f_row0_col12, #T_f3f8f_row0_col13, #T_f3f8f_row0_col14, #T_f3f8f_row0_col15, #T_f3f8f_row0_col16, #T_f3f8f_row0_col17, #T_f3f8f_row0_col18, #T_f3f8f_row0_col19, #T_f3f8f_row0_col20, #T_f3f8f_row0_col21, #T_f3f8f_row0_col22, #T_f3f8f_row0_col23, #T_f3f8f_row0_col24, #T_f3f8f_row0_col25, #T_f3f8f_row0_col26, #T_f3f8f_row0_col27, #T_f3f8f_row0_col28, #T_f3f8f_row1_col0, #T_f3f8f_row1_col1, #T_f3f8f_row1_col2, #T_f3f8f_row1_col3, #T_f3f8f_row1_col4, #T_f3f8f_row1_col5, #T_f3f8f_row1_col6, #T_f3f8f_row1_col7, #T_f3f8f_row1_col8, #T_f3f8f_row1_col9, #T_f3f8f_row1_col10, #T_f3f8f_row1_col11, #T_f3f8f_row1_col12, #T_f3f8f_row1_col13, #T_f3f8f_row1_col14, #T_f3f8f_row1_col15, #T_f3f8f_row1_col16, #T_f3f8f_row1_col17, #T_f3f8f_row1_col18, #T_f3f8f_row1_col19, #T_f3f8f_row1_col20, #T_f3f8f_row1_col21, #T_f3f8f_row1_col22, #T_f3f8f_row1_col23, #T_f3f8f_row1_col24, #T_f3f8f_row1_col25, #T_f3f8f_row1_col26, #T_f3f8f_row1_col27, #T_f3f8f_row1_col28, #T_f3f8f_row2_col0, #T_f3f8f_row2_col1, #T_f3f8f_row2_col2, #T_f3f8f_row2_col3, #T_f3f8f_row2_col4, #T_f3f8f_row2_col5, #T_f3f8f_row2_col6, #T_f3f8f_row2_col7, #T_f3f8f_row2_col8, #T_f3f8f_row2_col9, #T_f3f8f_row2_col10, #T_f3f8f_row2_col11, #T_f3f8f_row2_col12, #T_f3f8f_row2_col13, #T_f3f8f_row2_col14, #T_f3f8f_row2_col15, #T_f3f8f_row2_col16, #T_f3f8f_row2_col17, #T_f3f8f_row2_col18, #T_f3f8f_row2_col19, #T_f3f8f_row2_col20, #T_f3f8f_row2_col21, #T_f3f8f_row2_col22, #T_f3f8f_row2_col23, #T_f3f8f_row2_col24, #T_f3f8f_row2_col25, #T_f3f8f_row2_col26, #T_f3f8f_row2_col27, #T_f3f8f_row2_col28, #T_f3f8f_row3_col0, #T_f3f8f_row3_col1, #T_f3f8f_row3_col2, #T_f3f8f_row3_col3, #T_f3f8f_row3_col4, #T_f3f8f_row3_col5, #T_f3f8f_row3_col6, #T_f3f8f_row3_col7, #T_f3f8f_row3_col8, #T_f3f8f_row3_col9, #T_f3f8f_row3_col10, #T_f3f8f_row3_col11, #T_f3f8f_row3_col12, #T_f3f8f_row3_col13, #T_f3f8f_row3_col14, #T_f3f8f_row3_col15, #T_f3f8f_row3_col16, #T_f3f8f_row3_col17, #T_f3f8f_row3_col18, #T_f3f8f_row3_col19, #T_f3f8f_row3_col20, #T_f3f8f_row3_col21, #T_f3f8f_row3_col22, #T_f3f8f_row3_col23, #T_f3f8f_row3_col24, #T_f3f8f_row3_col25, #T_f3f8f_row3_col26, #T_f3f8f_row3_col27, #T_f3f8f_row3_col28, #T_f3f8f_row4_col0, #T_f3f8f_row4_col1, #T_f3f8f_row4_col2, #T_f3f8f_row4_col3, #T_f3f8f_row4_col4, #T_f3f8f_row4_col5, #T_f3f8f_row4_col6, #T_f3f8f_row4_col7, #T_f3f8f_row4_col8, #T_f3f8f_row4_col9, #T_f3f8f_row4_col10, #T_f3f8f_row4_col11, #T_f3f8f_row4_col12, #T_f3f8f_row4_col13, #T_f3f8f_row4_col14, #T_f3f8f_row4_col15, #T_f3f8f_row4_col16, #T_f3f8f_row4_col17, #T_f3f8f_row4_col18, #T_f3f8f_row4_col19, #T_f3f8f_row4_col20, #T_f3f8f_row4_col21, #T_f3f8f_row4_col22, #T_f3f8f_row4_col23, #T_f3f8f_row4_col24, #T_f3f8f_row4_col25, #T_f3f8f_row4_col26, #T_f3f8f_row4_col27, #T_f3f8f_row4_col28 {
+#T_c19bc_row0_col0, #T_c19bc_row0_col1, #T_c19bc_row0_col2, #T_c19bc_row0_col3, #T_c19bc_row0_col4, #T_c19bc_row0_col5, #T_c19bc_row0_col6, #T_c19bc_row0_col7, #T_c19bc_row0_col8, #T_c19bc_row0_col9, #T_c19bc_row0_col10, #T_c19bc_row0_col11, #T_c19bc_row0_col12, #T_c19bc_row0_col13, #T_c19bc_row0_col14, #T_c19bc_row0_col15, #T_c19bc_row0_col16, #T_c19bc_row0_col17, #T_c19bc_row0_col18, #T_c19bc_row0_col19, #T_c19bc_row0_col20, #T_c19bc_row0_col21, #T_c19bc_row0_col22, #T_c19bc_row0_col23, #T_c19bc_row0_col24, #T_c19bc_row0_col25, #T_c19bc_row0_col26, #T_c19bc_row0_col27, #T_c19bc_row0_col28, #T_c19bc_row1_col0, #T_c19bc_row1_col1, #T_c19bc_row1_col2, #T_c19bc_row1_col3, #T_c19bc_row1_col4, #T_c19bc_row1_col5, #T_c19bc_row1_col6, #T_c19bc_row1_col7, #T_c19bc_row1_col8, #T_c19bc_row1_col9, #T_c19bc_row1_col10, #T_c19bc_row1_col11, #T_c19bc_row1_col12, #T_c19bc_row1_col13, #T_c19bc_row1_col14, #T_c19bc_row1_col15, #T_c19bc_row1_col16, #T_c19bc_row1_col17, #T_c19bc_row1_col18, #T_c19bc_row1_col19, #T_c19bc_row1_col20, #T_c19bc_row1_col21, #T_c19bc_row1_col22, #T_c19bc_row1_col23, #T_c19bc_row1_col24, #T_c19bc_row1_col25, #T_c19bc_row1_col26, #T_c19bc_row1_col27, #T_c19bc_row1_col28, #T_c19bc_row2_col0, #T_c19bc_row2_col1, #T_c19bc_row2_col2, #T_c19bc_row2_col3, #T_c19bc_row2_col4, #T_c19bc_row2_col5, #T_c19bc_row2_col6, #T_c19bc_row2_col7, #T_c19bc_row2_col8, #T_c19bc_row2_col9, #T_c19bc_row2_col10, #T_c19bc_row2_col11, #T_c19bc_row2_col12, #T_c19bc_row2_col13, #T_c19bc_row2_col14, #T_c19bc_row2_col15, #T_c19bc_row2_col16, #T_c19bc_row2_col17, #T_c19bc_row2_col18, #T_c19bc_row2_col19, #T_c19bc_row2_col20, #T_c19bc_row2_col21, #T_c19bc_row2_col22, #T_c19bc_row2_col23, #T_c19bc_row2_col24, #T_c19bc_row2_col25, #T_c19bc_row2_col26, #T_c19bc_row2_col27, #T_c19bc_row2_col28, #T_c19bc_row3_col0, #T_c19bc_row3_col1, #T_c19bc_row3_col2, #T_c19bc_row3_col3, #T_c19bc_row3_col4, #T_c19bc_row3_col5, #T_c19bc_row3_col6, #T_c19bc_row3_col7, #T_c19bc_row3_col8, #T_c19bc_row3_col9, #T_c19bc_row3_col10, #T_c19bc_row3_col11, #T_c19bc_row3_col12, #T_c19bc_row3_col13, #T_c19bc_row3_col14, #T_c19bc_row3_col15, #T_c19bc_row3_col16, #T_c19bc_row3_col17, #T_c19bc_row3_col18, #T_c19bc_row3_col19, #T_c19bc_row3_col20, #T_c19bc_row3_col21, #T_c19bc_row3_col22, #T_c19bc_row3_col23, #T_c19bc_row3_col24, #T_c19bc_row3_col25, #T_c19bc_row3_col26, #T_c19bc_row3_col27, #T_c19bc_row3_col28, #T_c19bc_row4_col0, #T_c19bc_row4_col1, #T_c19bc_row4_col2, #T_c19bc_row4_col3, #T_c19bc_row4_col4, #T_c19bc_row4_col5, #T_c19bc_row4_col6, #T_c19bc_row4_col7, #T_c19bc_row4_col8, #T_c19bc_row4_col9, #T_c19bc_row4_col10, #T_c19bc_row4_col11, #T_c19bc_row4_col12, #T_c19bc_row4_col13, #T_c19bc_row4_col14, #T_c19bc_row4_col15, #T_c19bc_row4_col16, #T_c19bc_row4_col17, #T_c19bc_row4_col18, #T_c19bc_row4_col19, #T_c19bc_row4_col20, #T_c19bc_row4_col21, #T_c19bc_row4_col22, #T_c19bc_row4_col23, #T_c19bc_row4_col24, #T_c19bc_row4_col25, #T_c19bc_row4_col26, #T_c19bc_row4_col27, #T_c19bc_row4_col28 {
   font-size: 8pt;
 }
 </style>
@@ -367,7 +367,7 @@ print(f"The motif ID of the current TF data: {motif_id} \n")
     The motif ID of the current TF data: E2F2_E2F2_HUMAN.H11MO.0.B 
 
 <style type="text/css">
-#T_2ead2_row0_col0, #T_2ead2_row0_col1, #T_2ead2_row0_col2, #T_2ead2_row0_col3, #T_2ead2_row0_col4, #T_2ead2_row0_col5, #T_2ead2_row0_col6, #T_2ead2_row0_col7, #T_2ead2_row0_col8, #T_2ead2_row0_col9, #T_2ead2_row0_col10, #T_2ead2_row0_col11, #T_2ead2_row0_col12, #T_2ead2_row0_col13, #T_2ead2_row0_col14, #T_2ead2_row0_col15, #T_2ead2_row0_col16, #T_2ead2_row0_col17, #T_2ead2_row0_col18, #T_2ead2_row0_col19, #T_2ead2_row0_col20, #T_2ead2_row0_col21, #T_2ead2_row0_col22, #T_2ead2_row0_col23, #T_2ead2_row0_col24, #T_2ead2_row0_col25, #T_2ead2_row0_col26, #T_2ead2_row0_col27, #T_2ead2_row0_col28, #T_2ead2_row1_col0, #T_2ead2_row1_col1, #T_2ead2_row1_col2, #T_2ead2_row1_col3, #T_2ead2_row1_col4, #T_2ead2_row1_col5, #T_2ead2_row1_col6, #T_2ead2_row1_col7, #T_2ead2_row1_col8, #T_2ead2_row1_col9, #T_2ead2_row1_col10, #T_2ead2_row1_col11, #T_2ead2_row1_col12, #T_2ead2_row1_col13, #T_2ead2_row1_col14, #T_2ead2_row1_col15, #T_2ead2_row1_col16, #T_2ead2_row1_col17, #T_2ead2_row1_col18, #T_2ead2_row1_col19, #T_2ead2_row1_col20, #T_2ead2_row1_col21, #T_2ead2_row1_col22, #T_2ead2_row1_col23, #T_2ead2_row1_col24, #T_2ead2_row1_col25, #T_2ead2_row1_col26, #T_2ead2_row1_col27, #T_2ead2_row1_col28, #T_2ead2_row2_col0, #T_2ead2_row2_col1, #T_2ead2_row2_col2, #T_2ead2_row2_col3, #T_2ead2_row2_col4, #T_2ead2_row2_col5, #T_2ead2_row2_col6, #T_2ead2_row2_col7, #T_2ead2_row2_col8, #T_2ead2_row2_col9, #T_2ead2_row2_col10, #T_2ead2_row2_col11, #T_2ead2_row2_col12, #T_2ead2_row2_col13, #T_2ead2_row2_col14, #T_2ead2_row2_col15, #T_2ead2_row2_col16, #T_2ead2_row2_col17, #T_2ead2_row2_col18, #T_2ead2_row2_col19, #T_2ead2_row2_col20, #T_2ead2_row2_col21, #T_2ead2_row2_col22, #T_2ead2_row2_col23, #T_2ead2_row2_col24, #T_2ead2_row2_col25, #T_2ead2_row2_col26, #T_2ead2_row2_col27, #T_2ead2_row2_col28, #T_2ead2_row3_col0, #T_2ead2_row3_col1, #T_2ead2_row3_col2, #T_2ead2_row3_col3, #T_2ead2_row3_col4, #T_2ead2_row3_col5, #T_2ead2_row3_col6, #T_2ead2_row3_col7, #T_2ead2_row3_col8, #T_2ead2_row3_col9, #T_2ead2_row3_col10, #T_2ead2_row3_col11, #T_2ead2_row3_col12, #T_2ead2_row3_col13, #T_2ead2_row3_col14, #T_2ead2_row3_col15, #T_2ead2_row3_col16, #T_2ead2_row3_col17, #T_2ead2_row3_col18, #T_2ead2_row3_col19, #T_2ead2_row3_col20, #T_2ead2_row3_col21, #T_2ead2_row3_col22, #T_2ead2_row3_col23, #T_2ead2_row3_col24, #T_2ead2_row3_col25, #T_2ead2_row3_col26, #T_2ead2_row3_col27, #T_2ead2_row3_col28, #T_2ead2_row4_col0, #T_2ead2_row4_col1, #T_2ead2_row4_col2, #T_2ead2_row4_col3, #T_2ead2_row4_col4, #T_2ead2_row4_col5, #T_2ead2_row4_col6, #T_2ead2_row4_col7, #T_2ead2_row4_col8, #T_2ead2_row4_col9, #T_2ead2_row4_col10, #T_2ead2_row4_col11, #T_2ead2_row4_col12, #T_2ead2_row4_col13, #T_2ead2_row4_col14, #T_2ead2_row4_col15, #T_2ead2_row4_col16, #T_2ead2_row4_col17, #T_2ead2_row4_col18, #T_2ead2_row4_col19, #T_2ead2_row4_col20, #T_2ead2_row4_col21, #T_2ead2_row4_col22, #T_2ead2_row4_col23, #T_2ead2_row4_col24, #T_2ead2_row4_col25, #T_2ead2_row4_col26, #T_2ead2_row4_col27, #T_2ead2_row4_col28 {
+#T_8ee92_row0_col0, #T_8ee92_row0_col1, #T_8ee92_row0_col2, #T_8ee92_row0_col3, #T_8ee92_row0_col4, #T_8ee92_row0_col5, #T_8ee92_row0_col6, #T_8ee92_row0_col7, #T_8ee92_row0_col8, #T_8ee92_row0_col9, #T_8ee92_row0_col10, #T_8ee92_row0_col11, #T_8ee92_row0_col12, #T_8ee92_row0_col13, #T_8ee92_row0_col14, #T_8ee92_row0_col15, #T_8ee92_row0_col16, #T_8ee92_row0_col17, #T_8ee92_row0_col18, #T_8ee92_row0_col19, #T_8ee92_row0_col20, #T_8ee92_row0_col21, #T_8ee92_row0_col22, #T_8ee92_row0_col23, #T_8ee92_row0_col24, #T_8ee92_row0_col25, #T_8ee92_row0_col26, #T_8ee92_row0_col27, #T_8ee92_row0_col28, #T_8ee92_row1_col0, #T_8ee92_row1_col1, #T_8ee92_row1_col2, #T_8ee92_row1_col3, #T_8ee92_row1_col4, #T_8ee92_row1_col5, #T_8ee92_row1_col6, #T_8ee92_row1_col7, #T_8ee92_row1_col8, #T_8ee92_row1_col9, #T_8ee92_row1_col10, #T_8ee92_row1_col11, #T_8ee92_row1_col12, #T_8ee92_row1_col13, #T_8ee92_row1_col14, #T_8ee92_row1_col15, #T_8ee92_row1_col16, #T_8ee92_row1_col17, #T_8ee92_row1_col18, #T_8ee92_row1_col19, #T_8ee92_row1_col20, #T_8ee92_row1_col21, #T_8ee92_row1_col22, #T_8ee92_row1_col23, #T_8ee92_row1_col24, #T_8ee92_row1_col25, #T_8ee92_row1_col26, #T_8ee92_row1_col27, #T_8ee92_row1_col28, #T_8ee92_row2_col0, #T_8ee92_row2_col1, #T_8ee92_row2_col2, #T_8ee92_row2_col3, #T_8ee92_row2_col4, #T_8ee92_row2_col5, #T_8ee92_row2_col6, #T_8ee92_row2_col7, #T_8ee92_row2_col8, #T_8ee92_row2_col9, #T_8ee92_row2_col10, #T_8ee92_row2_col11, #T_8ee92_row2_col12, #T_8ee92_row2_col13, #T_8ee92_row2_col14, #T_8ee92_row2_col15, #T_8ee92_row2_col16, #T_8ee92_row2_col17, #T_8ee92_row2_col18, #T_8ee92_row2_col19, #T_8ee92_row2_col20, #T_8ee92_row2_col21, #T_8ee92_row2_col22, #T_8ee92_row2_col23, #T_8ee92_row2_col24, #T_8ee92_row2_col25, #T_8ee92_row2_col26, #T_8ee92_row2_col27, #T_8ee92_row2_col28, #T_8ee92_row3_col0, #T_8ee92_row3_col1, #T_8ee92_row3_col2, #T_8ee92_row3_col3, #T_8ee92_row3_col4, #T_8ee92_row3_col5, #T_8ee92_row3_col6, #T_8ee92_row3_col7, #T_8ee92_row3_col8, #T_8ee92_row3_col9, #T_8ee92_row3_col10, #T_8ee92_row3_col11, #T_8ee92_row3_col12, #T_8ee92_row3_col13, #T_8ee92_row3_col14, #T_8ee92_row3_col15, #T_8ee92_row3_col16, #T_8ee92_row3_col17, #T_8ee92_row3_col18, #T_8ee92_row3_col19, #T_8ee92_row3_col20, #T_8ee92_row3_col21, #T_8ee92_row3_col22, #T_8ee92_row3_col23, #T_8ee92_row3_col24, #T_8ee92_row3_col25, #T_8ee92_row3_col26, #T_8ee92_row3_col27, #T_8ee92_row3_col28, #T_8ee92_row4_col0, #T_8ee92_row4_col1, #T_8ee92_row4_col2, #T_8ee92_row4_col3, #T_8ee92_row4_col4, #T_8ee92_row4_col5, #T_8ee92_row4_col6, #T_8ee92_row4_col7, #T_8ee92_row4_col8, #T_8ee92_row4_col9, #T_8ee92_row4_col10, #T_8ee92_row4_col11, #T_8ee92_row4_col12, #T_8ee92_row4_col13, #T_8ee92_row4_col14, #T_8ee92_row4_col15, #T_8ee92_row4_col16, #T_8ee92_row4_col17, #T_8ee92_row4_col18, #T_8ee92_row4_col19, #T_8ee92_row4_col20, #T_8ee92_row4_col21, #T_8ee92_row4_col22, #T_8ee92_row4_col23, #T_8ee92_row4_col24, #T_8ee92_row4_col25, #T_8ee92_row4_col26, #T_8ee92_row4_col27, #T_8ee92_row4_col28 {
   font-size: 10pt;
 }
 </style>
@@ -390,7 +390,7 @@ afps_matrix = afps_df.filter(regex='_AF$|_fps$|_id$').copy()
 ```
 
 <style type="text/css">
-#T_edf88_row0_col0, #T_edf88_row0_col1, #T_edf88_row0_col2, #T_edf88_row0_col3, #T_edf88_row0_col4, #T_edf88_row0_col5, #T_edf88_row0_col6, #T_edf88_row0_col7, #T_edf88_row0_col8, #T_edf88_row0_col9, #T_edf88_row0_col10, #T_edf88_row1_col0, #T_edf88_row1_col1, #T_edf88_row1_col2, #T_edf88_row1_col3, #T_edf88_row1_col4, #T_edf88_row1_col5, #T_edf88_row1_col6, #T_edf88_row1_col7, #T_edf88_row1_col8, #T_edf88_row1_col9, #T_edf88_row1_col10, #T_edf88_row2_col0, #T_edf88_row2_col1, #T_edf88_row2_col2, #T_edf88_row2_col3, #T_edf88_row2_col4, #T_edf88_row2_col5, #T_edf88_row2_col6, #T_edf88_row2_col7, #T_edf88_row2_col8, #T_edf88_row2_col9, #T_edf88_row2_col10, #T_edf88_row3_col0, #T_edf88_row3_col1, #T_edf88_row3_col2, #T_edf88_row3_col3, #T_edf88_row3_col4, #T_edf88_row3_col5, #T_edf88_row3_col6, #T_edf88_row3_col7, #T_edf88_row3_col8, #T_edf88_row3_col9, #T_edf88_row3_col10, #T_edf88_row4_col0, #T_edf88_row4_col1, #T_edf88_row4_col2, #T_edf88_row4_col3, #T_edf88_row4_col4, #T_edf88_row4_col5, #T_edf88_row4_col6, #T_edf88_row4_col7, #T_edf88_row4_col8, #T_edf88_row4_col9, #T_edf88_row4_col10 {
+#T_100a1_row0_col0, #T_100a1_row0_col1, #T_100a1_row0_col2, #T_100a1_row0_col3, #T_100a1_row0_col4, #T_100a1_row0_col5, #T_100a1_row0_col6, #T_100a1_row0_col7, #T_100a1_row0_col8, #T_100a1_row0_col9, #T_100a1_row0_col10, #T_100a1_row1_col0, #T_100a1_row1_col1, #T_100a1_row1_col2, #T_100a1_row1_col3, #T_100a1_row1_col4, #T_100a1_row1_col5, #T_100a1_row1_col6, #T_100a1_row1_col7, #T_100a1_row1_col8, #T_100a1_row1_col9, #T_100a1_row1_col10, #T_100a1_row2_col0, #T_100a1_row2_col1, #T_100a1_row2_col2, #T_100a1_row2_col3, #T_100a1_row2_col4, #T_100a1_row2_col5, #T_100a1_row2_col6, #T_100a1_row2_col7, #T_100a1_row2_col8, #T_100a1_row2_col9, #T_100a1_row2_col10, #T_100a1_row3_col0, #T_100a1_row3_col1, #T_100a1_row3_col2, #T_100a1_row3_col3, #T_100a1_row3_col4, #T_100a1_row3_col5, #T_100a1_row3_col6, #T_100a1_row3_col7, #T_100a1_row3_col8, #T_100a1_row3_col9, #T_100a1_row3_col10, #T_100a1_row4_col0, #T_100a1_row4_col1, #T_100a1_row4_col2, #T_100a1_row4_col3, #T_100a1_row4_col4, #T_100a1_row4_col5, #T_100a1_row4_col6, #T_100a1_row4_col7, #T_100a1_row4_col8, #T_100a1_row4_col9, #T_100a1_row4_col10 {
   font-size: 10pt;
 }
 </style>
@@ -428,10 +428,10 @@ afps_mtx_lpv = afps_mtx_lpv.reset_index(drop=True)
 ```
 
 <style type="text/css">
-#T_53976 th {
+#T_d03bf th {
   font-size: 8pt;
 }
-#T_53976_row0_col0, #T_53976_row0_col1, #T_53976_row0_col2, #T_53976_row0_col3, #T_53976_row1_col0, #T_53976_row1_col1, #T_53976_row1_col2, #T_53976_row1_col3, #T_53976_row2_col0, #T_53976_row2_col1, #T_53976_row2_col2, #T_53976_row2_col3, #T_53976_row3_col0, #T_53976_row3_col1, #T_53976_row3_col2, #T_53976_row3_col3, #T_53976_row4_col0, #T_53976_row4_col1, #T_53976_row4_col2, #T_53976_row4_col3 {
+#T_d03bf_row0_col0, #T_d03bf_row0_col1, #T_d03bf_row0_col2, #T_d03bf_row0_col3, #T_d03bf_row1_col0, #T_d03bf_row1_col1, #T_d03bf_row1_col2, #T_d03bf_row1_col3, #T_d03bf_row2_col0, #T_d03bf_row2_col1, #T_d03bf_row2_col2, #T_d03bf_row2_col3, #T_d03bf_row3_col0, #T_d03bf_row3_col1, #T_d03bf_row3_col2, #T_d03bf_row3_col3, #T_d03bf_row4_col0, #T_d03bf_row4_col1, #T_d03bf_row4_col2, #T_d03bf_row4_col3 {
   font-size: 8pt;
 }
 </style>
@@ -475,10 +475,10 @@ fps_df_scaled = fps_df_scaled.add_suffix('_scaled')
 ```
 
 <style type="text/css">
-#T_7a246 th {
+#T_38b7a th {
   font-size: 10pt;
 }
-#T_7a246_row0_col0, #T_7a246_row0_col1, #T_7a246_row0_col2, #T_7a246_row0_col3, #T_7a246_row0_col4, #T_7a246_row1_col0, #T_7a246_row1_col1, #T_7a246_row1_col2, #T_7a246_row1_col3, #T_7a246_row1_col4, #T_7a246_row2_col0, #T_7a246_row2_col1, #T_7a246_row2_col2, #T_7a246_row2_col3, #T_7a246_row2_col4, #T_7a246_row3_col0, #T_7a246_row3_col1, #T_7a246_row3_col2, #T_7a246_row3_col3, #T_7a246_row3_col4, #T_7a246_row4_col0, #T_7a246_row4_col1, #T_7a246_row4_col2, #T_7a246_row4_col3, #T_7a246_row4_col4 {
+#T_38b7a_row0_col0, #T_38b7a_row0_col1, #T_38b7a_row0_col2, #T_38b7a_row0_col3, #T_38b7a_row0_col4, #T_38b7a_row1_col0, #T_38b7a_row1_col1, #T_38b7a_row1_col2, #T_38b7a_row1_col3, #T_38b7a_row1_col4, #T_38b7a_row2_col0, #T_38b7a_row2_col1, #T_38b7a_row2_col2, #T_38b7a_row2_col3, #T_38b7a_row2_col4, #T_38b7a_row3_col0, #T_38b7a_row3_col1, #T_38b7a_row3_col2, #T_38b7a_row3_col3, #T_38b7a_row3_col4, #T_38b7a_row4_col0, #T_38b7a_row4_col1, #T_38b7a_row4_col2, #T_38b7a_row4_col3, #T_38b7a_row4_col4 {
   font-size: 10pt;
 }
 </style>
@@ -523,10 +523,10 @@ fps_df_scaled_lpv = fps_df_scaled_lpv.reset_index(drop=True)
 ```
 
 <style type="text/css">
-#T_f8056 th {
+#T_4fab1 th {
   font-size: 10pt;
 }
-#T_f8056_row0_col0, #T_f8056_row0_col1, #T_f8056_row0_col2, #T_f8056_row1_col0, #T_f8056_row1_col1, #T_f8056_row1_col2, #T_f8056_row2_col0, #T_f8056_row2_col1, #T_f8056_row2_col2, #T_f8056_row3_col0, #T_f8056_row3_col1, #T_f8056_row3_col2, #T_f8056_row4_col0, #T_f8056_row4_col1, #T_f8056_row4_col2 {
+#T_4fab1_row0_col0, #T_4fab1_row0_col1, #T_4fab1_row0_col2, #T_4fab1_row1_col0, #T_4fab1_row1_col1, #T_4fab1_row1_col2, #T_4fab1_row2_col0, #T_4fab1_row2_col1, #T_4fab1_row2_col2, #T_4fab1_row3_col0, #T_4fab1_row3_col1, #T_4fab1_row3_col2, #T_4fab1_row4_col0, #T_4fab1_row4_col1, #T_4fab1_row4_col2 {
   font-size: 10pt;
 }
 </style>
@@ -545,4 +545,4 @@ fps_df_scaled_lpv = fps_df_scaled_lpv.reset_index(drop=True)
 The distribution of the unscaled and scaled FPS datasets can be plotted
 using Seaborn’s `displot` function.
 
-![](data-integration-nb_files/figure-commonmark/cell-30-output-1.png)
+![](data-integration-nb_files/figure-commonmark/cell-29-output-1.png)
