@@ -545,4 +545,4 @@ fps_df_scaled_lpv = fps_df_scaled_lpv.reset_index(drop=True)
 The distribution of the unscaled and scaled FPS datasets can be plotted
 using Seaborn’s `displot` function.
 
-![](data-integration-nb_files/figure-commonmark/cell-29-output-1.png)
+![fig](data-integration-nb_files/figure-commonmark/cell-29-output-1.png)
