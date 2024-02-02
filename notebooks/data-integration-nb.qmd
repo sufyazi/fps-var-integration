@@ -1,20 +1,7 @@
 ---
 title: Pan-Cancer TF Footprinting & Noncoding Mutation Data Integration
 author: Suffian Azizan
-format: 
-    gfm:
-        markdown-headings: atx
-        df-print: default
-    typst:
-        wrap: auto
-        papersize: a4
-        margin:
-            x: 2cm
-            y: 2cm
-        execute:
-            warning: false
-        number-sections: true
-        df-print: paged
+format: gfm
 jupyter: python3
 ---
 
