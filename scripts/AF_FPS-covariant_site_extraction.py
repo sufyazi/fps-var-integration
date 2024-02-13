@@ -122,8 +122,8 @@ def scale_merge_data(dt_afps, afps_df_lpv, motif_id, output_path):
 	# merge the AF-FPS and FPS-scaled dataframes on region_id and sample_id
 	afps_full_dfl = afps_df_lpv.merge(fps_df_scaled_lpv, on=['region_id', 'sample_id'])
 	print('Dataframes have been scaled and merged.')
-	print('Plotting jointplot...')
-	plot_jointplot(afps_full_dfl, motif_id, output_path)
+	# print('Plotting jointplot...')
+	# plot_jointplot(afps_full_dfl, motif_id, output_path)
 	return fps_df_scaled, fps_df_scaled_lpv, afps_full_dfl
 
 def filter_zero(afps_full_dfl):
