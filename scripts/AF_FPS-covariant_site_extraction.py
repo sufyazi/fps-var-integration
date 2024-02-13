@@ -245,7 +245,7 @@ def test_correlation_spearman(covar_sites_sorted, motif_id, output_path):
 
 	# save to file
 	print(f'Saving {motif_id} correlation test results to file...')
-	corr_df_allcovarsites.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_results.tsv', sep='\t', index=False)
+	corr_df_allcovarsites.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_results.tsv', sep='\t', index=True)
 
 	return corr_df_allcovarsites
 
@@ -261,14 +261,14 @@ def correct_for_fdr(corr_df_allcovarsites, motif_id, output_path):
 
 	# save to file
 	print(f'Saving {motif_id} FDR corrected p-values to file...')
-	corr_df_allcovarsites.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_results_fdr-corrected.tsv', sep='\t', index=False)
+	corr_df_allcovarsites.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_results_fdr-corrected.tsv', sep='\t', index=True)
 
 	# filter for significant correlations
 	significant_corr = corr_df_allcovarsites[corr_df_allcovarsites['adj_pvalues'] < 0.05]
 	print(f'Number of significant correlations for {motif_id}: {len(significant_corr)}')
 	# save to file
 	print(f'Saving {motif_id} significant correlations to file...')
-	significant_corr.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_restuls_significant.tsv', sep='\t', index=False)
+	significant_corr.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_restuls_significant.tsv', sep='\t', index=True)
 
 def process_data(tsv_filepath, output_path):
 	# load the data
