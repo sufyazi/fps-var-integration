@@ -1,5 +1,5 @@
+.DS_Store
 .vscode/
 raw-data/
-output-data/
-graphs/
-.DS_Store
+output-data/covariant-sites/
+output-data/correlation-tests/
