@@ -6,6 +6,7 @@
 
 import os
 import sys
+import logging
 import pandas as pd
 import seaborn as sns
 import itertools as it
@@ -43,12 +44,12 @@ def plot_jointplot(dataframe, motif_id, output_path):
 	plt.xlim(-0.1, 1.1)
 	g.figure.suptitle(f"Jointpot of AF and scaled FPS values of {motif_id}", fontsize=14)
 	# save the plot
-	print(f'Saving {motif_id} jointplot of AF and scaled FPS...')
+	logging.info(f'Saving {motif_id} jointplot of AF and scaled FPS...')
 	g.savefig(f'{output_path}/output-data/plots/{motif_id}/{motif_id}_AF_vs_FPS-scaled_jointplot.pdf', dpi=150, bbox_inches="tight")
 	# close the plot
 	plt.close("all")
 	del g
-	print('Plot space closed and plots have been saved to file.')
+	logging.info('Plot space closed and plots have been saved to file.')
 
 
 #########################
@@ -66,7 +67,7 @@ def load_datatable(tsv_filepath):
 	dt_afps = pd.read_csv(tsv_filepath, sep='\t')
 	# extract motif id from filename
 	motif_id = os.path.basename(tsv_filepath).replace('_fpscore-af-varsites-combined-matrix-wide.tsv', '')
-	print(f'{motif_id} data table has been loaded.')
+	logging.info(f'{motif_id} data table has been loaded.')
 	
 	# copy as a dataframe
 	afps_df = dt_afps.filter(regex='_AF$|_fps$|_id$').copy()
@@ -83,7 +84,7 @@ def load_datatable(tsv_filepath):
 	# sort the dataframe by region_id naturally
 	afps_df_lpv = afps_df_lpv.reindex(index=index_natsorted(afps_df_lpv['region_id']))
 	afps_df_lpv = afps_df_lpv.reset_index(drop=True)
-	print(f'{motif_id} matrix has been loaded and converted to long format.')
+	logging.info(f'{motif_id} matrix has been loaded and converted to long format.')
 	return dt_afps, motif_id, afps_df_lpv
 
 def scale_merge_data(dt_afps, afps_df_lpv, motif_id, output_path):
@@ -121,7 +122,7 @@ def scale_merge_data(dt_afps, afps_df_lpv, motif_id, output_path):
 
 	# merge the AF-FPS and FPS-scaled dataframes on region_id and sample_id
 	afps_full_dfl = afps_df_lpv.merge(fps_df_scaled_lpv, on=['region_id', 'sample_id'])
-	print('Dataframes have been scaled and merged.')
+	logging.info('Dataframes have been scaled and merged.')
 	# print('Plotting jointplot...')
 	# plot_jointplot(afps_full_dfl, motif_id, output_path)
 	return fps_df_scaled, fps_df_scaled_lpv, afps_full_dfl
@@ -134,31 +135,31 @@ def filter_zero(afps_full_dfl):
 
 def calculate_variance(dt, fps_df_scaled, motif_id, merged_filt_dfl):
 	# calculate the variance of AF and FPS scaled values across sample_ids per region_id
-	print(f'Wrangling {motif_id} data for calculations...')
+	logging.info(f'Wrangling {motif_id} data for calculations...')
 	# extract af columns
 	af_df = dt.filter(regex='_AF$|_id$').copy()
 	# print af_df length
-	print(f'Length of {motif_id} original data table: {len(af_df)}')
-	print(f'Subsetting {motif_id} data table with no-zero merged long table...')
+	logging.info(f'Length of {motif_id} original data table: {len(af_df)}')
+	logging.info(f'Subsetting {motif_id} data table with no-zero merged long table...')
 	# filter out the rows whose `region_id` is not in the `region_id` column of `merged_filt`; reduce the repeated `region_id` column to unique values in `merged_filt` into an array
 	merged_filt_uniq_regid = merged_filt_dfl['region_id'].unique()
 	# then using this array, keep only the rows in the af_df that have `region_id` values in the array
 	af_df_filt = af_df[af_df['region_id'].isin(merged_filt_uniq_regid)]
 	# print af_df_filt length
-	print(f'Length of {motif_id} filtered data table: {len(af_df_filt)}')
+	logging.info(f'Length of {motif_id} filtered data table: {len(af_df_filt)}')
 	# set the index to 'region_id'
 	af_df_filt_idx = af_df_filt.set_index('region_id')
 	# calculate variance of af values across samples per region_id and add to a new column called 'af_var'
-	print(f'Calculating {motif_id} AF variances...')
+	logging.info(f'Calculating {motif_id} AF variances...')
 	af_df_filt_idx['AF_var'] = af_df_filt_idx.var(axis=1)
 
 	# do the same for fps scaled values
 	fps_df_scaled_filt = fps_df_scaled[fps_df_scaled.index.isin(merged_filt_uniq_regid)]
 	# print fps_df_scaled_filt length
-	print(f'Length of {motif_id} filtered FPS-scaled data table: {len(fps_df_scaled_filt)}')
+	logging.info(f'Length of {motif_id} filtered FPS-scaled data table: {len(fps_df_scaled_filt)}')
 	fps_df_scaled_filt_idx = fps_df_scaled_filt.copy()
 	# calculate variance of fps_scaled values across samples per region_id and add to a new column called 'fps_scaled_var'
-	print(f'Calculating {motif_id} FPS_scaled variances...')
+	logging.info(f'Calculating {motif_id} FPS_scaled variances...')
 	fps_df_scaled_filt_idx['FPS_scaled_var'] = fps_df_scaled_filt_idx.var(axis=1)
 	return af_df_filt_idx, fps_df_scaled_filt_idx
 
@@ -177,10 +178,10 @@ def merged_stats_df(af_df_filt_idx, fps_df_scaled_filt_idx, merged_filt_dfl):
 	return merged_stat
 	
 def get_covariant_sites(merged_stat, motif_id, output_path):
-	print('Getting unique region IDs and extracting only AF_var and FPS_scaled_var columns...')
+	logging.info('Getting unique region IDs and extracting only AF_var and FPS_scaled_var columns...')
 	# subset merged_stat
 	merged_stat_vars = merged_stat[['AF_var', 'FPS_scaled_var']].copy().drop_duplicates()
-	print(f'Length of {motif_id} merged_stat_vars: {len(merged_stat_vars)}')
+	logging.info(f'Length of {motif_id} merged_stat_vars: {len(merged_stat_vars)}')
 	# now calculate the IQR for AF_var and FPS_scaled_var separately
 	# calculate IQR for AF_var
 	q1_vaf = merged_stat_vars['AF_var'].quantile(0.25)
@@ -196,15 +197,15 @@ def get_covariant_sites(merged_stat, motif_id, output_path):
 	lower_bound_outliers_vfps = q1_vfps - (1.5 * iqr_vfps)
 	upper_bound_outliers_vfps = q3_vfps + (1.5 * iqr_vfps)
 
-	print(f'Outlier bounds for {motif_id} AF variance: {lower_bound_outliers_vaf, upper_bound_outliers_vaf}')
+	logging.info(f'Outlier bounds for {motif_id} AF variance: {lower_bound_outliers_vaf, upper_bound_outliers_vaf}')
 
-	print(f'Outlier bounds for {motif_id} FPS_scaled variance: {lower_bound_outliers_vfps, upper_bound_outliers_vfps}')
+	logging.info(f'Outlier bounds for {motif_id} FPS_scaled variance: {lower_bound_outliers_vfps, upper_bound_outliers_vfps}')
 
 	# using the outlier of only the upper bound, get the region IDs that are outliers in the AF_var and FPS_scaled_var columns
 
 	outlier_af_fps_vars = merged_stat_vars[(merged_stat_vars['AF_var'] > upper_bound_outliers_vaf) & (merged_stat_vars['FPS_scaled_var'] > upper_bound_outliers_vfps)]
 
-	print(f'Length of {motif_id} outlier_af_fps_vars: {len(outlier_af_fps_vars)}')
+	logging.info(f'Number of {motif_id} outlier sites: {len(outlier_af_fps_vars)}')
 
 	# now extract the unique region IDs as a list from the outlier_af_fps_vars
 	outliers_list = outlier_af_fps_vars.index.tolist()
@@ -214,10 +215,9 @@ def get_covariant_sites(merged_stat, motif_id, output_path):
 	
 	# sort the outlier sites by descending order of AF_var and FPS_scaled_var
 	covar_sites_sorted = covar_sites.sort_values(by=['AF_var', 'FPS_scaled_var'], ascending=[False, False])
-	print(f'Number of unique {motif_id} covar_sites: {len(covar_sites_sorted)/5}')
 
 	# save to file
-	print(f'Saving {motif_id} covariant sites to file...')
+	logging.info(f'Saving {motif_id} covariant sites to file...')
 	covar_sites.to_csv(f'{output_path}/covariant-sites/{motif_id}_covariant_sites.tsv', sep='\t', index=True)
 
 	return covar_sites_sorted
@@ -231,7 +231,7 @@ def test_correlation_spearman(covar_sites_sorted, motif_id, output_path):
 	covar_sites_sorted_novars = covar_sites_sorted_novars.reset_index()
 	# group by region_id and calculate spearman correlation
 	correlations = covar_sites_sorted_novars.groupby('region_id').apply(lambda group: spearmanr(group['AF'], group['FPS_scaled']), include_groups=False)
-	print(f'Testing for correlation between AF_var and FPS_scaled_var for {motif_id}...')
+	logging.info(f'Testing for correlation between AF_var and FPS_scaled_var for {motif_id}...')
 	# that returned a pandas Series, so convert to dataframe
 	correlations_df = pd.DataFrame(correlations, columns=['corr_coeff_and_pvalue'])
 	# split the 'corr_coeff_and_pvalue' column into two separate columns using apply() and pd.Series
@@ -244,14 +244,14 @@ def test_correlation_spearman(covar_sites_sorted, motif_id, output_path):
 	corr_df_allcovarsites = correlations_df_sorted.reset_index(drop=True)
 
 	# save to file
-	print(f'Saving {motif_id} correlation test results to file...')
+	logging.info(f'Saving {motif_id} correlation test results to file...')
 	corr_df_allcovarsites.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_results.tsv', sep='\t', index=True)
 
 	return corr_df_allcovarsites
 
 def correct_for_fdr(corr_df_allcovarsites, motif_id, output_path):
 	# perform FDR correction on the p-values
-	print(f'Performing FDR correction on {motif_id} p-values...')
+	logging.info(f'Performing FDR correction on {motif_id} p-values...')
 	# extract the p-values
 	pvalues = corr_df_allcovarsites['pvalue']
 	# perform FDR correction
@@ -260,15 +260,15 @@ def correct_for_fdr(corr_df_allcovarsites, motif_id, output_path):
 	corr_df_allcovarsites['adj_pvalues'] = fdr_corrected[1]
 
 	# save to file
-	print(f'Saving {motif_id} FDR corrected p-values to file...')
+	logging.info(f'Saving {motif_id} FDR corrected p-values to file...')
 	corr_df_allcovarsites.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_results_fdr-corrected.tsv', sep='\t', index=True)
 
 	# filter for significant correlations
 	significant_corr = corr_df_allcovarsites[corr_df_allcovarsites['adj_pvalues'] < 0.05]
-	print(f'Number of significant correlations for {motif_id}: {len(significant_corr)}')
+	logging.info(f'Number of significant correlations for {motif_id}: {len(significant_corr)}')
 	# save to file
-	print(f'Saving {motif_id} significant correlations to file...')
-	significant_corr.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_restuls_significant.tsv', sep='\t', index=True)
+	logging.info(f'Saving {motif_id} significant correlations to file...')
+	significant_corr.to_csv(f'{output_path}/correlation-tests/{motif_id}_correlation_test_results_fdr-corrected_sig.tsv', sep='\t', index=True)
 
 def process_data(tsv_filepath, output_path):
 	# load the data
@@ -287,7 +287,7 @@ def process_data(tsv_filepath, output_path):
 	corr_df_allcovarsites = test_correlation_spearman(covar_sites_sorted, motif_id, output_path)
 	# perform FDR correction on the p-values
 	correct_for_fdr(corr_df_allcovarsites, motif_id, output_path)
-	print(f'Processing of {motif_id} data is complete.')
+	logging.info(f'Processing of {motif_id} data is complete.')
 
 
 ##################
@@ -301,6 +301,8 @@ if len(sys.argv) < 3:
 else:
     root_dir = sys.argv[1]
     output_dir = sys.argv[2]
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # ##################
 # # define globals #

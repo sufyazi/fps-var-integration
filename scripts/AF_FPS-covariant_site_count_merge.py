@@ -4,14 +4,21 @@
 # import libraries #
 ####################
 import os
+import sys
 import pandas as pd
 from natsort import order_by_index, index_natsorted
 ####################
 
-input_dir = "/Users/sufyazi/Documents/local-storage/bioinf/repos/fps-var-integration-local/output-data/correlation-tests"
+# check if the input directory (correlation-tests sig tsvs) and output directory are provided
+if len(sys.argv) != 3:
+    print("Usage: python3 AF_FPS-covariant_site_count_merge.py <input_dir> <output_dir>")
+    sys.exit(1)
+
+# set the input directory (where the correlation-tests directory is located)
+input_dir = sys.argv[1]
 
 # grab all the files with the name *significant.tsv
-files = [f for f in os.listdir(input_dir) if f.endswith("significant.tsv")]
+files = [f for f in os.listdir(input_dir) if f.endswith("sig.tsv")]
 print(len(files))
 
 # initialize the master df
@@ -22,7 +29,7 @@ for index, file in enumerate(files):
     # get the file path
     filepath = os.path.join(input_dir, file)
     # extract motif id from filename
-    motif_id = file.replace('_correlation_test_restuls_significant.tsv', '')
+    motif_id = file.replace('_correlation_test_results_fdr-corrected_sig.tsv', '')
     print(f"Processing file no. {index+1} of {len(files)} files...")
     print(f"Motif ID: {motif_id}")
     # load the file into a df
@@ -70,7 +77,8 @@ print(master_df.head())
 
 # save the master df to a file
 print("Saving the master df to a file...")
-output_file = "/Users/sufyazi/Documents/local-storage/bioinf/repos/fps-var-integration-local/output-data/covariant-site-counts/AF_FPS-covariant_sites-significant.combined.tsv"
+output_dir = sys.argv[2]
+output_file = f"{output_dir}/AF_FPS-covariant_sites_significant.combined.tsv"
 
 master_df.to_csv(output_file, sep="\t", index=False)
 
